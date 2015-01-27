@@ -24,11 +24,11 @@ app.controller('ContactsController', function($scope) {
     $scope.contacts = [
     {
         name: "Troy McClure",
-        number: "123"
+        number: "123976976876"
     },
     {
         name: "Sea Captain",
-        number: "456"
+        number: "456786767867"
     },
     {
         name: "",
@@ -54,10 +54,10 @@ app.controller('ContactsController', function($scope) {
         chrome.app.window.create('chat.html', {
             'id': contact.number,
             innerBounds: {
-              width: 500,
-              height: 600,
-              minWidth: 500,
-              minHeight: 600
+                width: 300,
+                height: 500,
+                minWidth: 300,
+                minHeight: 500
             }//,
         //    frame: "none"
           });

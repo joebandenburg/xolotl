@@ -6,20 +6,19 @@
 <link rel="stylesheet" media="all" href="css/main.css">
 <base target="_blank">
 </head>
-<body data-ng-controller="ContactsController">
+<body class="contact-window" data-ng-controller="ContactsController">
 
-<section id="main">
-    <div class="contact-list"data-ng-repeat="contact in contacts">
-        <span class="contact-item">
-            <div class="contact-name" ng-click="openConversation(contact)" >{{contact.number}} : </div>
-            <input class="contact-number" type="text" name="contactName" ng-model="contact.name">
-        </span>        
+<div class="add-contact-form">
+    <input class="add-contact-input" type="text" ng-enter="addContact()" ng-model="inputNumber">
+    <div class="add-contact-button" ng-click="addContact()">+</div>
+</div>
+
+<div class="contact-list">
+    <div class="contact-item" data-ng-repeat="contact in contacts" ng-click="openConversation(contact)">
+        <div class="contact-picture"></div>
+        <div class="contact-value" >{{ contact.name || contact.number}}</div>
     </div>
-    <span class="contact-input-wrapper">
-        <input class="contact-input" type="text" ng-enter="addContact()" ng-model="inputNumber">
-        <div class="add-contact-button" ng-click="addContact()">+</div>
-    </span>
-</section>
+</div>
 
 <script src="bower_components/angularjs/angular.js"></script>
 <script src="js/app.js"></script>

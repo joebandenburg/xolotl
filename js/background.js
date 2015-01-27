@@ -2,10 +2,10 @@ chrome.app.runtime.onLaunched.addListener(function() {
   chrome.app.window.create('contacts.html', {
     'id': 'MyWindowID',
     innerBounds: {
-      width: 500,
-      height: 600,
-      minWidth: 500,
-      minHeight: 600
+      width: 300,
+      height: 500,
+      minWidth: 300,
+      minHeight: 500
     }//,
 //    frame: "none"
   });
