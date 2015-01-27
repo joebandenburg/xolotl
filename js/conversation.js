@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    var module = angular.module('XolotlConversation', ['XolotlAppEvents']);
+    var module = angular.module('XolotlConversation', []);
 
     module.controller('ConversationController', function($scope, $routeParams) {
 

@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    var module = angular.module('XolotlContacts', ['XolotlAppEvents']);
+    var module = angular.module('XolotlContacts', []);
 
     module.controller('ContactsController', function($scope, $location) {
         $scope.contacts = [
