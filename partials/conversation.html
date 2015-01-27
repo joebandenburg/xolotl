@@ -1,0 +1,13 @@
+<div class="conversation-window">
+    <div class="message-list">
+        <div class="message-item" ng-repeat="message in messages" ng-class="{'self-message': message.self}">
+            <div class="message-item-inner">
+                {{message.body}}
+            </div>
+        </div>
+    </div>
+    <div class="send-message-form">
+        <input class="send-message-input" type="text" ng-enter="sendMessage()" ng-model="message">
+        <div class="send-message-button" ng-click="sendMessage()">&gt;</div>
+    </div>
+</div>

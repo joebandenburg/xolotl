@@ -12,12 +12,12 @@
                 "+447000000001-1000003" : { body: "no complaints", self: false, status: "sent", sentTime: 1000003 }
             }
 
-        $scope.conversationData = Object.keys($scope.conversations).map(function (key) {return $scope.conversations[key]});
+        $scope.messages = Object.keys($scope.conversations).map(function (key) {return $scope.conversations[key]});
 
         $scope.sendMessage = function() {
 
-            $scope.conversationData.push({body: $scope.inputMessage, self: true});
-            $scope.inputMessage = "";
+            $scope.messages.push({body: $scope.message, self: true});
+            $scope.message = "";
         };
 
     });
