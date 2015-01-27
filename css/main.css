@@ -136,3 +136,25 @@
 .message-item.self-message {
     justify-content: flex-end;
 }
+
+.toolbar {
+    background: #eee;
+    border-bottom: 1px solid #666;
+    display: flex;
+    align-items: stretch;
+}
+
+.toolbar-button {
+    cursor: pointer;
+    min-width: 40px;
+    max-width: 40px;
+    font-size: 20px;
+    background-color: #67D067;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.toolbar-text {
+    padding: 1em;
+}
