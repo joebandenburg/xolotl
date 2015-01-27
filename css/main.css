@@ -10,7 +10,7 @@
 }
 
 .contact-picture {
-    background: #999;
+    background: #98A8C2;
     max-width: 62px;
     min-width: 62px;
     height: 62px;
@@ -19,7 +19,7 @@
 
 .contact-list {
     flex: 1;
-    background: #777;
+    background: #E4E4E4;
     overflow-y: scroll;
 }
 
@@ -85,7 +85,7 @@
 
 .message-list {
     flex: 1;
-    background: #777;
+    background: #E4E4E4;
     overflow-y: scroll;
     padding: 1em;
 }
@@ -138,7 +138,7 @@
 }
 
 .toolbar {
-    background: #eee;
+    background: #242424;
     border-bottom: 1px solid #666;
     display: flex;
     align-items: stretch;
@@ -153,8 +153,11 @@
     text-align: center;
     color: #ffffff;
     text-decoration: none;
+    padding-top: 6px;
 }
 
 .toolbar-text {
-    padding: 1em;
+    padding: 0.5em;
+    color: #fff;
+    font-size: 20px;
 }
