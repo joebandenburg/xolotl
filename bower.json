@@ -11,5 +11,8 @@
     "assbanditman"
   ],
   "license": "GPLv3",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "angularjs": "~1.3.10"
+  }
 }

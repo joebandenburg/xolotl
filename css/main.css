@@ -1,0 +1,77 @@
+html, body {
+
+
+}
+
+.contact-item {
+height: 40px;
+margin-bottom: 1px;
+display: block;
+background: #4D4D4D;
+}
+
+.contact-name {
+color: #fff;
+font-size: 20px;
+position: relative;
+float: left;
+border: none;
+padding: 3px;
+padding-left: 6px;
+}
+
+.contact-number {
+background: none;
+color: #fff;
+font-size: 20px;
+height: 30px;
+width: 50%;
+position: relative;
+float: right;
+-webkit-appearance: none;
+border: none;
+margin: 0px;
+outline: none;
+padding-top: 6px;
+}
+
+.contact-input-wrapper {
+height: 40px;
+width: 100%;
+position: relative;
+display: block;
+background: #D8D8B4;
+}
+
+.add-contact-button {
+width: 45px;
+height: 40px;
+background: #CD5757;
+position: relative;
+float: right;
+color: #fff;
+font-size: 30px;
+text-align: center;
+line-height: 35px;
+}
+
+.contact-input {
+background: none;
+color: #fff;
+font-size: 20px;
+position: relative;
+float: left;
+padding-top: 5px;
+padding-left: 6px;
+-webkit-appearance: none;
+border: none;
+margin: 0px;
+outline: none;
+height: 30px;
+width: 80%;
+}
+
+.self-message {
+    text-align: right;
+    background: #D34A5F;
+}

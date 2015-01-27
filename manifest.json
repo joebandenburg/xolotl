@@ -1,0 +1,16 @@
+{
+  "name": "Hello World!",
+  "description": "My first Chrome App.",
+  "version": "0.1",
+  "manifest_version": 2,
+  "app": {
+    "background": {
+      "scripts": ["js/background.js"]
+    }
+  },
+  "icons": { 
+    "16": "assets/calculator-16.png", 
+    "128": "assets/calculator-128.png" 
+  },
+  "permissions": ["storage", "unlimitedStorage"]
+}
