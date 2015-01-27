@@ -2,7 +2,7 @@
     'use strict';
     var module = angular.module('XolotlContacts', ['XolotlAppEvents']);
 
-    module.controller('ContactsController', function($scope) {
+    module.controller('ContactsController', function($scope, $location) {
         $scope.contacts = [
         {
             name: "Troy McClure",
@@ -27,24 +27,13 @@
         $scope.addContact = function() {
             var num = $scope.inputNumber;
             if (isValidNumber(num)) {
-                $scope.contacts.push({name: "", number: num})
+                $scope.contacts.push({name: "", number: num});
                 $scope.inputNumber = "";
             }
         };
 
         $scope.openConversation = function(contact) {
-            chrome.app.window.create('conversation.html', {
-                'id': contact.number,
-                innerBounds: {
-                    width: 300,
-                    height: 500,
-                    minWidth: 300,
-                    minHeight: 500
-                }//,
-            //    frame: "none"
-              });
+            $location.path('/conversation/' + contact.number);
         };
-
-
     });
 })();

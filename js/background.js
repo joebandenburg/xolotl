@@ -1,5 +1,5 @@
 chrome.app.runtime.onLaunched.addListener(function() {
-  chrome.app.window.create('contacts.html', {
+  chrome.app.window.create('index.html', {
     'id': 'MyWindowID',
     innerBounds: {
       width: 300,

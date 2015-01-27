@@ -2,9 +2,9 @@
     'use strict';
     var module = angular.module('XolotlConversation', ['XolotlAppEvents']);
 
-    module.controller('ChatController', function($scope) {
+    module.controller('ConversationController', function($scope, $routeParams) {
 
-        console.log(chrome.app.window.current().id);
+        console.log($routeParams.number);
 
         $scope.conversations = {
                 "+447000000001-1000000" : { body: "Hello, how are you?", self: false, status: "sending...", sentTime: 1000000 },
