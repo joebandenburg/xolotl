@@ -1,4 +1,4 @@
-var app = angular.module('XolotlApp', []);
+var app = angular.module('XolotlApp', ['XolotlAppEvents']);
 
 app.controller('ChatController', function($scope) {
 
