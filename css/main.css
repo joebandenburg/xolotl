@@ -128,24 +128,37 @@ flex: 1;
 .message-item {
     display: flex;
     justify-content: flex-start;
+    margin-top: 0.5em;
 }
 
 .message-item-inner {
 background: #fff;
 padding: 0.5em;
-margin: 0.2em;
-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.1);
 max-width: 80%;
 word-wrap: break-word;
+border-top: 1px solid #A51818;
+box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.2);
+}
+
+.self-message .message-item-inner{
+    border-color: #186FA5;
 }
 
 .message-item.self-message {
     justify-content: flex-end;
 }
 
+.message-identity {
+background: #A51818;
+font-size: 20px;
+min-width: 30px;
+text-align: center;
+color: #fff;
+height: 30px;
+}
+
 .toolbar {
     background: #242424;
-    border-bottom: 1px solid #666;
     display: flex;
     align-items: stretch;
     justify-content: space-between;
@@ -156,7 +169,6 @@ cursor: pointer;
 min-width: 34px;
 max-width: 34px;
 font-size: 21px;
-background-color: #67D067;
 text-align: center;
 color: #ffffff;
 }
@@ -172,7 +184,6 @@ cursor: pointer;
 min-width: 34px;
 max-width: 34px;
 font-size: 23px;
-background-color: #853F94;
 text-align: center;
 color: #ffffff;
 }

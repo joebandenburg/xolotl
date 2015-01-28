@@ -8,7 +8,7 @@
     </div>
     <div class="message-list">
         <div class="message-item" ng-repeat="message in messages" ng-class="{'self-message': message.self}">
-            <div ng-hide="message.self">{{contact.name.charAt(0)}}</div>
+            <div class="message-identity"  ng-hide="message.self" >{{contact.name.charAt(0)}}</div>
             <div class="message-item-inner">
                 {{message.body}}
             </div>
