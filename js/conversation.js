@@ -18,19 +18,19 @@
                 body: "Hello, how are you?",
                 self: false,
                 status: "sending...",
-                sentTime: 1000000
+                sentTime: 1422459294117
             },
             "+447000000001-1000002": {
                 body: "I'm, fine thanks. You?",
                 self: true,
                 status: "failed",
-                sentTime: 1000002
+                sentTime: 1422459814117
             },
             "+447000000001-1000003": {
                 body: "no complaints",
                 self: false,
                 status: "sent",
-                sentTime: 1000003
+                sentTime: 1422459894117
             }
         };
 
