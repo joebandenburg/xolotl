@@ -1,17 +1,21 @@
 <div class="conversation-window">
     <div class="toolbar">
-        <a class="toolbar-button" href="#/contacts">&lt;</a>
-        <div class="toolbar-text">Brian</div>
+        <a class="toolbar-button" href="#/contacts"><i class="fa fa-angle-left"></i></a>
+        <div class="toolbar-text">{{contact.name}}</div>
+        <div class="toolbar-options" ng-click="openOptions()">
+            <i class="fa fa-cog" ></i>            
+        </div>
     </div>
     <div class="message-list">
         <div class="message-item" ng-repeat="message in messages" ng-class="{'self-message': message.self}">
+            <div ng-hide="message.self">{{contact.name.charAt(0)}}</div>
             <div class="message-item-inner">
                 {{message.body}}
             </div>
         </div>
     </div>
     <div class="send-message-form">
+        <!-- <div class="send-message-button" ng-click="sendMessage()"><i class="fa fa-comment"></i> : </div> -->
         <input class="send-message-input" type="text" ng-enter="sendMessage()" ng-model="message">
-        <div class="send-message-button" ng-click="sendMessage()">&gt;</div>
     </div>
 </div>

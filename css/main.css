@@ -87,37 +87,42 @@
     flex: 1;
     background: #E4E4E4;
     overflow-y: scroll;
-    padding: 1em;
+    padding: 0.1em;
 }
 
 .send-message-form {
-    border-color: #6B6B6B;
-    border-style: solid;
-    border-width: 1px;
-    flex-direction: row;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
+border-top-color: #B8B8B8;
+border-top-style: solid;
+border-top-width: 1px;
+flex-direction: row;
+display: flex;
+align-items: stretch;
+justify-content: center;
 }
 
 .send-message-button {
-    cursor: pointer;
-    width: 45px;
-    background: #D06767;
-    color: #fff;
-    font-size: 30px;
-    text-align: center;
+cursor: pointer;
+color: #D5D5D5;
+font-size: 24px;
+text-align: center;
+padding-left: 0.5em;
 }
 
 .send-message-input {
-    background: none;
-    color: #000;
-    font-size: 20px;
-    padding-left: 6px;
-    border: none;
-    outline: none;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    flex: 1;
+background: none;
+color: #000;
+font-size: 16px;
+padding-left: 0.5em;
+padding-top: 0.5em;
+border: none;
+padding-bottom: 0.5em;
+outline: none;
+font-family: 'Segoe UI', Tahoma, sans-serif;
+flex: 1;
+}
+
+.ng-hide {
+    display: none;
 }
 
 .message-item {
@@ -126,11 +131,12 @@
 }
 
 .message-item-inner {
-    background: #fff;
-    padding: 1em;
-    margin: 0.5em;
-    box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.22);
-    max-width: 80%;
+background: #fff;
+padding: 0.5em;
+margin: 0.2em;
+box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.1);
+max-width: 80%;
+word-wrap: break-word;
 }
 
 .message-item.self-message {
@@ -142,22 +148,31 @@
     border-bottom: 1px solid #666;
     display: flex;
     align-items: stretch;
+    justify-content: space-between;
 }
 
 .toolbar-button {
-    cursor: pointer;
-    min-width: 40px;
-    max-width: 40px;
-    font-size: 20px;
-    background-color: #67D067;
-    text-align: center;
-    color: #ffffff;
-    text-decoration: none;
-    padding-top: 6px;
+cursor: pointer;
+min-width: 34px;
+max-width: 34px;
+font-size: 21px;
+background-color: #67D067;
+text-align: center;
+color: #ffffff;
 }
 
 .toolbar-text {
     padding: 0.5em;
     color: #fff;
-    font-size: 20px;
+    font-size: 14px;
+}
+
+.toolbar-options {
+cursor: pointer;
+min-width: 34px;
+max-width: 34px;
+font-size: 23px;
+background-color: #853F94;
+text-align: center;
+color: #ffffff;
 }

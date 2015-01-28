@@ -2,9 +2,16 @@
     'use strict';
     var module = angular.module('XolotlConversation', []);
 
-    module.controller('ConversationController', function($scope, $routeParams) {
+    module.controller('ConversationController', function($scope, $routeParams, $location) {
 
         console.log($routeParams.number);
+
+        $scope.number = $routeParams.number;
+
+        $scope.contact = {
+            name: 'Joe Bandenburg',
+            number: '+4423423423423'
+        };
 
         $scope.conversations = {
                 "+447000000001-1000000" : { body: "Hello, how are you?", self: false, status: "sending...", sentTime: 1000000 },
@@ -18,6 +25,10 @@
 
             $scope.messages.push({body: $scope.message, self: true});
             $scope.message = "";
+        };
+
+        $scope.openOptions = function() {
+            $location.path('/options/' + $routeParams.number);
         };
 
     });
