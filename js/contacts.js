@@ -1,8 +1,8 @@
 (function() {
-    'use strict';
-    var module = angular.module('XolotlContacts', []);
+    "use strict";
+    var module = angular.module("XolotlContacts", []);
 
-    module.controller('ContactsController', function($scope, $location) {
+    module.controller("ContactsController", function($scope, $location) {
         $scope.contacts = [
         {
             name: "Troy McClure",
@@ -17,7 +17,7 @@
             number: "4576455464564"
         }];
 
-        $scope.inputNumber = ""
+        $scope.inputNumber = "";
 
         var isValidNumber = function(number) {
             // todo
@@ -33,7 +33,7 @@
         };
 
         $scope.openConversation = function(contact) {
-            $location.path('/conversation/' + contact.number);
+            $location.path("/conversation/" + contact.number);
         };
     });
 })();
