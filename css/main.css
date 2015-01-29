@@ -1,12 +1,17 @@
+body {
+    font-family: "roboto";
+    font-weight: 300;
+}
+
 .contact-window {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
 }
 
 .contact-picture {
@@ -43,7 +48,6 @@
     padding-left: 0.5em;
 }
 
-
 .add-contact-form {
     flex-direction: row;
     display: flex;
@@ -69,18 +73,18 @@
     outline: none;
     font-family: 'Segoe UI', Tahoma, sans-serif;
     flex: 1;
-    padding: 0.5em;      
+    padding: 0.5em;
 }
 
 .conversation-window {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
 }
 
 .message-list {
@@ -91,34 +95,34 @@
 }
 
 .send-message-form {
-border-top-color: #B8B8B8;
-border-top-style: solid;
-border-top-width: 1px;
-flex-direction: row;
-display: flex;
-align-items: stretch;
-justify-content: center;
+    border-top-color: #B8B8B8;
+    border-top-style: solid;
+    border-top-width: 1px;
+    flex-direction: row;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
 }
 
 .send-message-button {
-cursor: pointer;
-color: #D5D5D5;
-font-size: 24px;
-text-align: center;
-padding-left: 0.5em;
+    cursor: pointer;
+    color: #D5D5D5;
+    font-size: 24px;
+    text-align: center;
+    padding-left: 0.5em;
 }
 
 .send-message-input {
-background: none;
-color: #000;
-font-size: 16px;
-padding-left: 0.5em;
-padding-top: 0.5em;
-border: none;
-padding-bottom: 0.5em;
-outline: none;
-font-family: 'Segoe UI', Tahoma, sans-serif;
-flex: 1;
+    background: none;
+    color: #000;
+    font-size: 16px;
+    padding-left: 0.5em;
+    padding-top: 0.5em;
+    border: none;
+    padding-bottom: 0.5em;
+    outline: none;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    flex: 1;
 }
 
 .ng-hide {
@@ -132,16 +136,16 @@ flex: 1;
 }
 
 .message-item-inner {
-background: #fff;
-padding: 0.5em;
-max-width: 80%;
-word-wrap: break-word;
-border-top: 1px solid rgb(100, 191, 63);
-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.2);
-font-weight: 400;
+    background: #fff;
+    padding: 0.5em;
+    max-width: 80%;
+    word-wrap: break-word;
+    border-top: 1px solid rgb(100, 191, 63);
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    font-weight: 400;
 }
 
-.self-message .message-item-inner{
+.self-message .message-item-inner {
     border-color: #186FA5;
 }
 
@@ -150,12 +154,12 @@ font-weight: 400;
 }
 
 .message-identity {
-background: rgb(100, 191, 63);
-font-size: 20px;
-min-width: 30px;
-text-align: center;
-color: #fff;
-height: 30px;
+    background: rgb(100, 191, 63);
+    font-size: 20px;
+    min-width: 30px;
+    text-align: center;
+    color: #fff;
+    height: 30px;
 }
 
 .toolbar {
@@ -165,12 +169,12 @@ height: 30px;
 }
 
 .toolbar-button {
-cursor: pointer;
-min-width: 36px;
-max-width: 36px;
-font-size: 24px;
-text-align: center;
-color: #ffffff;
+    cursor: pointer;
+    min-width: 36px;
+    max-width: 36px;
+    font-size: 24px;
+    text-align: center;
+    color: #ffffff;
 }
 
 .toolbar-text {
@@ -182,12 +186,12 @@ color: #ffffff;
 }
 
 .toolbar-options {
-cursor: pointer;
-min-width: 34px;
-max-width: 34px;
-font-size: 24px;
-text-align: center;
-color: #ffffff;
+    cursor: pointer;
+    min-width: 34px;
+    max-width: 34px;
+    font-size: 24px;
+    text-align: center;
+    color: #ffffff;
 }
 
 .message-time {
@@ -211,9 +215,4 @@ color: #ffffff;
     padding-left: 1em;
     white-space: nowrap;
     text-overflow: ellipsis;
-}
-
-body {
-    font-family: "roboto";
-    font-weight: 300;
 }
