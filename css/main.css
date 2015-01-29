@@ -189,6 +189,15 @@ text-align: center;
 color: #ffffff;
 }
 
+.message-time {
+    color: #C0C0C0;
+    margin-top: 0.2em;
+    font-size: 11px;
+}
+
+.message-body {
+    font-size: 14px;
+}
 
 .default-query {
     color: #ccc;

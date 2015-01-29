@@ -10,7 +10,12 @@
         <div class="message-item" ng-repeat="message in messages" ng-class="{'self-message': message.self}">
             <div class="message-identity"  ng-hide="message.self" >{{contact.name.charAt(0)}}</div>
             <div class="message-item-inner">
-                {{message.body}}
+                <div class="message-body">
+                    {{message.body}}
+                </div>
+                <div class="message-time">
+                    {{message.sentTime | date:"short"}}
+                </div>
             </div>
         </div>
     </div>
