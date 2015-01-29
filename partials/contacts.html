@@ -6,14 +6,19 @@
         </div>
     </div>
     <div class="add-contact-form">
-        <input class="add-contact-input" placeholder="Search query..." type="text" ng-enter="addContact()" ng-model="inputNumber">
+        <input class="add-contact-input" placeholder="Search query..." type="text" ng-enter="handleContext()" ng-model="contextInput">
     </div>
     <div class="contact-list">
-        <div class="contact-item" data-ng-repeat="contact in contacts" ng-click="openConversation(contact)">
-            <div class="contact-picture" ng-style="{{contactStyle(contact)}}">{{contact.name.charAt(0)}}</div>
+        <div class="contact-item" ng-repeat="contact in filteredContacts" ng-click="openConversation(contact)">
+            <div class="contact-picture" ng-style="{{contactStyle(contact.number)}}">{{contact.name.charAt(0)}}</div>
             <div>
                 <div class="contact-value" >{{ contact.name || contact.number}}</div>
                 <div class="contact-last-message" >{{contact.lastMessage}}</div>
+            </div>
+        </div>
+        <div ng-hide="filteredContacts.length" ng-click="addContact()">
+            <div class="add-contact-message">
+                Add new contact
             </div>
         </div>
     </div>

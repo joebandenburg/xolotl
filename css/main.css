@@ -3,6 +3,25 @@ body {
     font-weight: 300;
 }
 
+.add-contact-message {
+    height: 40px;
+    border-top-color: #444;
+    background: #FFF;
+    border-top-style: solid;
+    border-top-width: 1px;
+    font-size: 24px;
+    align-items: center;
+    display: flex;
+    font-weight: 400;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.add-contact-value {
+    height: 40px;    background: #FFF;      
+    font-size: 24px;  align-items: center;  display: flex;  justify-content: center;
+    cursor: pointer;
+}
 .contact-window {
     position: absolute;
     top: 0;
