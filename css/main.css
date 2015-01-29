@@ -138,6 +138,7 @@ max-width: 80%;
 word-wrap: break-word;
 border-top: 1px solid rgb(100, 191, 63);
 box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.2);
+font-weight: 400;
 }
 
 .self-message .message-item-inner{
@@ -204,10 +205,15 @@ color: #ffffff;
 }
 
 .contact-last-message {
-    color: #bbb;
+    color: #909090;
     overflow: hidden;
     height: 18px;
     padding-left: 1em;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+body {
+    font-family: "roboto";
+    font-weight: 300;
 }
