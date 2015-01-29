@@ -1,13 +1,20 @@
 <div class="contact-window">
-    <div class="add-contact-form">
-        <input class="add-contact-input" type="text" ng-enter="addContact()" ng-model="inputNumber">
-        <div class="add-contact-button" ng-click="addContact()">+</div>
+    <div class="toolbar">
+        <div class="toolbar-text"></div>
+        <div class="toolbar-options" ng-click="openOptions()">
+            <i class="fa fa-cog" ></i>            
+        </div>
     </div>
-
+    <div class="add-contact-form">
+        <input class="add-contact-input" placeholder="Search query..." type="text" ng-enter="addContact()" ng-model="inputNumber">
+    </div>
     <div class="contact-list">
         <div class="contact-item" data-ng-repeat="contact in contacts" ng-click="openConversation(contact)">
-            <div class="contact-picture"></div>
-            <div class="contact-value" >{{ contact.name || contact.number}}</div>
+            <div class="contact-picture" ng-style="{{contactStyle(contact)}}">{{contact.name.charAt(0)}}</div>
+            <div>
+                <div class="contact-value" >{{ contact.name || contact.number}}</div>
+                <div class="contact-last-message" >{{contact.lastMessage}}</div>
+            </div>
         </div>
     </div>
 </div>
