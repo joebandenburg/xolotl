@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="add-contact-form">
-        <input class="add-contact-input" placeholder="Search query..." type="text" ng-enter="handleContext()" ng-model="contextInput">
+        <input class="context-input" placeholder="Search query..." type="text" ng-enter="handleContext()" ng-model="contextInput">
     </div>
     <div class="contact-list">
         <div class="contact-item" ng-repeat="contact in filteredContacts" ng-click="openConversation(contact)">

@@ -1,0 +1,16 @@
+<div class="add-conversation-window">
+    <div class="toolbar">
+        <a class="toolbar-button" href="#/contacts"><i class="fa fa-angle-left"></i></a>
+        <div class="toolbar-text">Add Conversation</div>
+    </div>
+    <div class="contact-input-area">
+        <div class="contact-picture" ng-style="contactStyle(contact.number)">{{contact.name.charAt(0)}}</div>
+        <input id="name-input" class="add-contact-input" placeholder="Name" ng-class="{ 'input-error' : isValidInput(contact.name)}" type="text" ng-model="contact.name">
+        <input id="number-input" class="add-contact-input" placeholder="Number" ng-class="{ 'input-error' : isValidInput(contact.number)}" type="text" ng-model="contact.number" ng-model-options="{debounce: 500}">
+    </div>
+    <div class="button-footer">
+        <button ng-click="confirm()"><i class="fa fa-check"></i></button>
+        <div class="divider"></div>
+        <button ng-click="cancel()" ><i class="fa fa-times"></i></button>
+    </div>
+</div>
