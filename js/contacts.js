@@ -2,7 +2,7 @@
     "use strict";
     var module = angular.module("XolotlContacts", []);
 
-    module.controller("ContactsController", function($scope, $location) {
+    module.controller("ContactsController", function($scope, $location, $filter) {
         $scope.contacts = [
         {
             name: "Troy McClure",
@@ -25,7 +25,11 @@
             lastMessage: "Is that you?"
         }];
 
-        $scope.inputNumber = "";
+        $scope.contextInput = "";
+
+        $scope.$watch("contextInput", function(newValue, oldValue) {
+            $scope.filteredContacts = $filter("filter")($scope.contacts, $scope.contextInput);
+        });
 
         var isValidNumber = function(number) {
             // todo
@@ -33,10 +37,10 @@
         };
 
         $scope.addContact = function() {
-            var num = $scope.inputNumber;
+            var num = $scope.contextInput;
             if (isValidNumber(num)) {
                 $scope.contacts.push({name: "", number: num});
-                $scope.inputNumber = "";
+                $scope.contextInput = "";
             }
         };
 
@@ -60,14 +64,22 @@
             return "hsl(" + (hashCode(seed) % 360) + ", 50%, 50%)";
         };
 
-        $scope.contactStyle = function(contact) {
+        $scope.contactStyle = function(number) {
             return {
-                "background" : randomHslString(contact.number)
+                "background" : randomHslString(number)
             };
         };
 
         $scope.openConversation = function(contact) {
             $location.path("/conversation/" + contact.number);
+        };
+
+        $scope.handleContext = function() {
+            if ($scope.filteredContacts.length === 0) {
+                $scope.addContact();
+            } else {
+                $scope.openConversation($scope.filteredContacts[0]);
+            }
         };
     });
 })();
