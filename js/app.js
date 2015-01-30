@@ -1,13 +1,19 @@
 (function() {
     "use strict";
-    var app = angular.module("XolotlApp", ["ngRoute", "XolotlContacts", "XolotlConversation", "XolotlOption"]);
+    var app = angular.module("XolotlApp",
+        ["ngRoute", "XolotlContacts", "XolotlConversation", "XolotlOption",
+        "XolotlAddConversation", "XolotlColorGenerator"]);
 
     app.config(function($routeProvider) {
         $routeProvider.when("/contacts", {
             templateUrl: "partials/contacts.html",
             controller: "ContactsController"
         });
-        $routeProvider.when("/conversation/:number", {
+        $routeProvider.when("/conversation/add/:data", {
+            templateUrl: "partials/add-conversation.html",
+            controller: "AddConversationController"
+        });
+        $routeProvider.when("/contact/:number", {
             templateUrl: "partials/conversation.html",
             controller: "ConversationController"
         });
