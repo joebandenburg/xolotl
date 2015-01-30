@@ -39,7 +39,9 @@
         };
 
         $scope.addContact = function() {
-            $location.path("/conversation/add/" + $scope.contextInput);
+            console.log("adding contact " + $scope.contextInput);
+            var data = $scope.contextInput ? $scope.contextInput : "";
+            $location.path("/conversation/add/" + data);
         };
 
         $scope.contactStyle = function(number) {

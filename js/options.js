@@ -2,12 +2,23 @@
     "use strict";
     var module = angular.module("XolotlOption", []);
 
-    module.controller("OptionController", function($scope, $routeParams, $location) {
+    module.controller("OptionController", function($scope, $rootScope, $routeParams, $location) {
 
-        console.log($routeParams.number);
+        $scope.contactNumber = $routeParams.number;
+
+        $scope.deleteConversation = function() {
+            var array = $rootScope.contacts;
+            var length = array.length;
+            for (var i = 0; i < length; i++) {
+                if (array[i].number === $scope.contactNumber) {
+                    $rootScope.contacts.splice(i, 1);
+                }
+            }
+            $location.path("/contacts/");
+        };
 
         $scope.openConversation = function() {
-            $location.path("/conversation/" + $routeParams.number);
+            $location.path("/contact/" + $scope.contactNumber);
         };
 
     });
