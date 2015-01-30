@@ -2,41 +2,13 @@
     "use strict";
     var module = angular.module("XolotlContacts", []);
 
-    module.controller("ContactsController", function($scope, $rootScope, $location, $filter, ColorGenerator) {
-        if (!$rootScope.contacts) {
-            $rootScope.contacts = [
-            {
-                name: "Troy McClure",
-                number: "123976976876",
-                lastMessage: "Hi, I'm Troy McCLure, you might rlorem sdfsdfs sdf sdf sdf sdfsdf sdfs dfs dfsdfsdfs"
-            },
-            {
-                name: "Joe Bandenburg",
-                number: "+44277234223",
-                lastMessage: "I'm a teapot, short and stout, here's my"
-            },
-            {
-                name: "Sea Captain",
-                number: "456786767867",
-                lastMessage: "Arrrgh, that be true"
-            },
-            {
-                name: "",
-                number: "4576455464564",
-                lastMessage: "Is that you?"
-            }];
-        }
+    module.controller("ContactsController", function($scope, $location, $filter, ColorGenerator, ContactsService) {
 
         $scope.contextInput = "";
 
         $scope.$watch("contextInput", function(newValue, oldValue) {
-            $scope.filteredContacts = $filter("filter")($rootScope.contacts, $scope.contextInput);
+            $scope.filteredContacts = ContactsService.getMatchingContacts($scope.contextInput);
         });
-
-        var isValidNumber = function(number) {
-            // todo
-            return true;
-        };
 
         $scope.addContact = function() {
             console.log("adding contact " + $scope.contextInput);

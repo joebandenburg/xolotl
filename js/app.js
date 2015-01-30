@@ -2,7 +2,8 @@
     "use strict";
     var app = angular.module("XolotlApp",
         ["ngRoute", "XolotlContacts", "XolotlConversation", "XolotlOption",
-        "XolotlAddConversation", "XolotlColorGenerator"]);
+        "XolotlAddConversation", "XolotlColorGenerator", "XolotlContactsService",
+        "XolotlEnter", "XolotlConversationService"]);
 
     app.config(function($routeProvider) {
         $routeProvider.when("/contacts", {

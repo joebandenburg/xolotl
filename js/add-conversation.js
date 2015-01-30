@@ -3,7 +3,7 @@
     var module = angular.module("XolotlAddConversation", []);
 
     module.controller("AddConversationController",
-        function($scope, $rootScope, $routeParams, $location, ColorGenerator) {
+        function($scope, $routeParams, $location, ColorGenerator, ContactsService) {
 
         $scope.data = $routeParams.data;
 
@@ -66,13 +66,13 @@
         $scope.confirm = function() {
             $scope.tryingToConfirm = true;
             if (isContactValid($scope.contact)) {
-                $rootScope.contacts.push(
+                ContactsService.addContact(
                     {
                         name: $scope.contact.name,
                         number: $scope.contact.number,
                         lastMessage: ""
                     }
-                );
+                    );
                 $location.path("/contacts");
             }
         };

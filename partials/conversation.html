@@ -1,15 +1,15 @@
 <div class="conversation-window">
     <div class="toolbar">
         <a class="toolbar-button" href="#/contacts"><i class="fa fa-angle-left"></i></a>
-        <div class="toolbar-text">{{contact.name}}</div>
+        <div class="toolbar-text">{{contact.name || contact.number}}</div>
         <div class="toolbar-options" ng-click="openOptions()">
             <i class="fa fa-cog" ></i>            
         </div>
     </div>
     <div class="message-list">
         <div class="message-item" ng-repeat="message in messages" ng-class="{'self-message': message.self}">
-            <div class="message-identity"  ng-hide="message.self" >{{contact.name.charAt(0)}}</div>
-            <div class="message-item-inner">
+            <div class="message-identity" ng-style="{{contactStyle(contact.number)}}" ng-hide="message.self" >{{contact.name.charAt(0)}}</div>
+            <div class="message-item-inner" ng-style="{{messageStyle(contact.number, message.self)}}">
                 <div class="message-body">
                     {{message.body}}
                 </div>
