@@ -1,6 +1,6 @@
 {
-  "name": "Hello World!",
-  "description": "My first Chrome App.",
+  "name": "Xolotl",
+  "description": "A secure chat client",
   "version": "0.1",
   "manifest_version": 2,
   "app": {
@@ -9,8 +9,8 @@
     }
   },
   "icons": { 
-    "16": "assets/calculator-16.png", 
-    "128": "assets/calculator-128.png" 
+    "16": "assets/icon-16.png", 
+    "128": "assets/icon-128.png" 
   },
   "permissions": ["storage", "unlimitedStorage"]
 }
