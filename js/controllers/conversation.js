@@ -30,7 +30,7 @@
         };
 
         $scope.sendMessage = function() {
-            $scope.messages.push({body: $scope.message, self: true, sentTime: Date.now()});
+            ConversationService.addMessage($scope.number, $scope.message, true);
             $scope.message = "";
         };
 

@@ -2,7 +2,7 @@
     "use strict";
     var module = angular.module("XolotlConversationService", []);
 
-    module.service("ConversationService", function($filter) {
+    module.service("ConversationService", function($rootScope) {
 
         var conversations = {
             "123456789": [
@@ -68,6 +68,10 @@
                     status: "sent",
                     sentTime: Date.now()
                 });
+            $rootScope.$broadcast("newMessage", {
+                message: message,
+                number: number
+            });
         };
 
         this.deleteConversation = function(num) {
