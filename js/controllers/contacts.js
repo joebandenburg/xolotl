@@ -2,7 +2,7 @@
     "use strict";
     var module = angular.module("XolotlContacts", []);
 
-    module.controller("ContactsController", function($scope, $location, $filter, $rootScope, ColorGenerator, ContactsService) {
+    module.controller("ContactsController", function($scope, $location, $rootScope, ColorGenerator, ContactsService) {
 
         $scope.contextInput = "";
 
