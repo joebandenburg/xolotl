@@ -2,7 +2,7 @@
     "use strict";
     var module = angular.module("XolotlContacts", []);
 
-    module.controller("ContactsController", function($scope, $location, $filter, ColorGenerator, ContactsService) {
+    module.controller("ContactsController", function($scope, $location, $filter, $rootScope, ColorGenerator, ContactsService) {
 
         $scope.contextInput = "";
 
@@ -10,8 +10,14 @@
             $scope.filteredContacts = ContactsService.getMatchingContacts($scope.contextInput);
         });
 
+        $rootScope.$on("newMessage", function(messageEvent, args) {
+            var obj = ContactsService.getContact(args.number)
+            if (obj) {
+                obj.lastMessage = args.message;
+            }
+        });
+
         $scope.addContact = function() {
-            console.log("adding contact " + $scope.contextInput);
             var data = $scope.contextInput ? $scope.contextInput : "";
             $location.path("/conversation/add/" + data);
         };
