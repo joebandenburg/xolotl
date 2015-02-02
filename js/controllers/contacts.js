@@ -11,7 +11,7 @@
         });
 
         $rootScope.$on("newMessage", function(messageEvent, args) {
-            var obj = ContactsService.getContact(args.number)
+            var obj = ContactsService.getContact(args.number);
             if (obj) {
                 obj.lastMessage = args.message;
             }
