@@ -16,7 +16,7 @@
                 <div class="contact-last-message" >{{contact.lastMessage}}</div>
             </div>
         </div>
-        <div ng-hide="filteredContacts.length" ng-click="addContact()">
+        <div ng-hide="filteredContacts.length || !contacts" ng-click="addContact()">
             <div class="add-contact-message">
                 Add new contact
             </div>
