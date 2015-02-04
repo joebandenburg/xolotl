@@ -10,6 +10,8 @@
     "strict": true,
     "globals": {
         "angular": true,
-        "chrome": true
+        "chrome": true,
+        "window": true,
+        "IDBKeyRange": true
     }
 }

@@ -1,19 +1,24 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlContacts", []);
+    var module = angular.module("XolotlContacts", ["XolotlColorGenerator", "XolotlDataService"]);
 
-    module.controller("ContactsController", function($scope, $location, $rootScope, ColorGenerator, ContactsService) {
+    module.controller("ContactsController", function($scope, $location, $rootScope, $filter,
+        ColorGenerator, DataService) {
 
         $scope.contextInput = "";
 
-        $scope.$watch("contextInput", function(newValue, oldValue) {
-            $scope.filteredContacts = ContactsService.getMatchingContacts($scope.contextInput);
+        DataService.getAllContacts().then(function(data) {
+            $scope.$apply(function() {
+                $scope.contacts = data;
+                $scope.filteredContacts = $filter("filter")($scope.contacts, $scope.contextInput);
+            });
+        }, function(error) {
+            console.error(error);
         });
 
-        $rootScope.$on("newMessage", function(messageEvent, args) {
-            var obj = ContactsService.getContact(args.number);
-            if (obj) {
-                obj.lastMessage = args.message;
+        $scope.$watch("contextInput", function(newValue, oldValue) {
+            if ($scope.contacts) {
+                $scope.filteredContacts = $filter("filter")($scope.contacts, $scope.contextInput);
             }
         });
 

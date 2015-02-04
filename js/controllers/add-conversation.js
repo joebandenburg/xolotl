@@ -1,9 +1,9 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlAddConversation", []);
+    var module = angular.module("XolotlAddConversation", ["XolotlColorGenerator", "XolotlDataService"]);
 
     module.controller("AddConversationController",
-        function($scope, $routeParams, $location, ColorGenerator, ContactsService) {
+        function($scope, $routeParams, $location, ColorGenerator, DataService) {
 
         $scope.data = $routeParams.data;
 
@@ -66,14 +66,18 @@
         $scope.confirm = function() {
             $scope.tryingToConfirm = true;
             if (isContactValid($scope.contact)) {
-                ContactsService.addContact(
-                    {
-                        name: $scope.contact.name,
-                        number: $scope.contact.number,
-                        lastMessage: ""
-                    }
-                    );
-                $location.path("/contacts");
+                DataService.addContact({
+                    name: $scope.contact.name,
+                    number: $scope.contact.number,
+                    lastMessage: ""
+                }).then(function() {
+                    console.log("successfully added a contact");
+                    $scope.$apply(function() {
+                        $location.path("/contacts");
+                    });
+                }, function(error) {
+                    console.error("failed to add a contact " + error);
+                });
             }
         };
     });

@@ -1,21 +1,41 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlConversation", []);
+    var module = angular.module("XolotlConversation", ["XolotlColorGenerator", "XolotlDataService"]);
 
-    module.controller("ConversationController", function($scope, $routeParams, $location, ConversationService,
-        ContactsService, ColorGenerator) {
-
-        console.log($routeParams.number);
+    module.controller("ConversationController", function($scope, $routeParams, $location, $filter,
+        $rootScope, DataService, ColorGenerator) {
 
         $scope.number = $routeParams.number;
+        $scope.messages = [];
 
-        $scope.contact = ContactsService.getContact($scope.number);
+        DataService.getAllContacts().then(function(contacts) {
+            $scope.$apply(function() {
+                $scope.contact = $filter("filter")(contacts, {number: $scope.number}, true)[0];
+            });
+        }, function(error) {
+            console.error(error);
+        });
 
-        $scope.messages = ConversationService.getConversation($scope.number);
+        $rootScope.$on("newMessage", function(messageEvent, args) {
+            if (args.number === $scope.number) {
+                $scope.updateMessages();
+            }
+        });
+
+        $scope.updateMessages = function() {
+            DataService.getAllMessages($scope.number).then(function(results) {
+                $scope.$apply(function () {
+                    $scope.messages = results;
+                });
+            }, function(error) {
+                console.error(error);
+            });
+        };
+        $scope.updateMessages();
 
         $scope.contactStyle = function(number) {
             return {
-                "background" : ColorGenerator.randomHslString(number)
+                "background" : ColorGenerator.randomHslString($scope.number)
             };
         };
 
@@ -24,13 +44,20 @@
                 return {};
             } else {
                 return {
-                    "border-top" : "1px solid " + ColorGenerator.randomHslString(number)
+                    "border-top" : "1px solid " + ColorGenerator.randomHslString($scope.number)
                 };
             }
         };
 
         $scope.sendMessage = function() {
-            ConversationService.addMessage($scope.number, $scope.message, true);
+            var message = {
+                number: $scope.number,
+                body: $scope.message,
+                isSelf: true,
+                sentTime: Date.now(),
+                status: "success"
+            };
+            DataService.addMessage(message);
             $scope.message = "";
         };
 
