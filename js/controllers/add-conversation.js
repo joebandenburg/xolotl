@@ -1,9 +1,9 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlAddConversation", []);
+    var module = angular.module("XolotlAddConversation", ["XolotlColorGenerator", "XolotlDataService"]);
 
     module.controller("AddConversationController",
-        function($scope, $routeParams, $location, ColorGenerator, DatabaseService) {
+        function($scope, $routeParams, $location, ColorGenerator, DataService) {
 
         $scope.data = $routeParams.data;
 
@@ -66,7 +66,7 @@
         $scope.confirm = function() {
             $scope.tryingToConfirm = true;
             if (isContactValid($scope.contact)) {
-                DatabaseService.addContact({
+                DataService.addContact({
                     name: $scope.contact.name,
                     number: $scope.contact.number,
                     lastMessage: ""

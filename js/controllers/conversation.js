@@ -1,15 +1,14 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlConversation", []);
+    var module = angular.module("XolotlConversation", ["XolotlColorGenerator", "XolotlDataService"]);
 
     module.controller("ConversationController", function($scope, $routeParams, $location, $filter,
-        $rootScope, DatabaseService, ColorGenerator) {
+        $rootScope, DataService, ColorGenerator) {
 
         $scope.number = $routeParams.number;
         $scope.messages = [];
-        
 
-        DatabaseService.getAllContacts().then(function(contacts) {
+        DataService.getAllContacts().then(function(contacts) {
             $scope.$apply(function() {
                 $scope.contact = $filter("filter")(contacts, {number: $scope.number}, true)[0];
             });
@@ -24,7 +23,7 @@
         });
 
         $scope.updateMessages = function() {
-            DatabaseService.getAllMessages($scope.number).then(function(results) {
+            DataService.getAllMessages($scope.number).then(function(results) {
                 $scope.$apply(function () {
                     $scope.messages = results;
                 });
@@ -58,7 +57,7 @@
                 sentTime: Date.now(),
                 status: "success"
             };
-            DatabaseService.addMessage(message);
+            DataService.addMessage(message);
             $scope.message = "";
         };
 

@@ -11,6 +11,7 @@
     "globals": {
         "angular": true,
         "chrome": true,
-        "window": true
+        "window": true,
+        "IDBKeyRange": true
     }
 }

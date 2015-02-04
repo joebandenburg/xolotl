@@ -1,0 +1,100 @@
+(function() {
+    "use strict";
+    var module = angular.module("XolotlDatabaseService", []);
+
+    module.service("DatabaseService", function(dbName) {
+        var self = this;
+        var db;
+
+        this.openDatabase = function() {
+            return new Promise(function(resolve, reject) {
+                var request = window.indexedDB.open(dbName);
+                console.log("open the db");
+                request.onsuccess = function(event) {
+                    console.log("onsuccess");
+                    db = request.result;
+                    resolve(db);
+                };
+                request.onupgradeneeded = function(event) {
+                    console.log("onupgradeneeded");
+                    self.createStore(event.target.result);
+                };
+                request.onerror = reject;
+            });
+        };
+
+        this.getDatabaseConnection = function() {
+            if (db) {
+                return Promise.resolve(db);
+            } else {
+                return this.openDatabase();
+            }
+        };
+
+        this.createStore = function(db) {
+            var objectStore = db.createObjectStore("messageStore", {
+                autoIncrement : true
+            });
+            objectStore.createIndex("number", "number", {
+                unique: false
+            });
+
+            var contactStore = db.createObjectStore("contactStore", {
+                keyPath: "number"
+            });
+            contactStore.createIndex("name", "name", {
+                unique: false
+            });
+        };
+
+        this.getDataObjects = function(index, keyRange) {
+            return new Promise(function(resolve, reject) {
+                var objects = [];
+                var request = index.openCursor(keyRange);
+                request.onsuccess = function(event) {
+                    var cursor = event.target.result;
+                    if (cursor) {
+                        objects.push(cursor.value);
+                        cursor.continue();
+                    } else {
+                        resolve(objects);
+                    }
+                };
+                request.onerror = reject;
+            });
+        };
+
+        this.deleteDataObjects = function(store, index, keyRange) {
+            return new Promise(function(resolve, reject) {
+                var request = index.openKeyCursor(keyRange);
+                request.onsuccess = function() {
+                    var cursor = request.result;
+                    if (cursor) {
+                        store.delete(cursor.primaryKey);
+                        cursor.continue();
+                    } else {
+                        resolve();
+                    }
+                };
+                request.onerror = reject;
+            });
+        };
+
+        /*
+            Admin functionality
+        */
+
+        this.deleteDatabase = function() {
+            console.log("deleting database");
+            if (db) {
+                db.close();
+            }
+            return new Promise(function(resolve, reject) {
+                var request = window.indexedDB.deleteDatabase(dbName);
+                request.onsuccess = resolve;
+                request.onerror = reject;
+                request.onblocked = reject;
+            });
+        };
+    });
+})();

@@ -2,8 +2,7 @@
     "use strict";
     var app = angular.module("XolotlApp",
         ["ngRoute", "XolotlContacts", "XolotlConversation", "XolotlOption",
-        "XolotlAddConversation", "XolotlColorGenerator",
-        "XolotlEnter", "XolotlDatabaseService",]);
+        "XolotlAddConversation", "XolotlEnter"]);
 
     app.config(function($routeProvider) {
         $routeProvider.when("/contacts", {
@@ -26,5 +25,6 @@
             redirectTo: "/contacts"
         });
     });
+    app.value("dbName", "XolotlDatabase");
 
 })();
