@@ -69,7 +69,10 @@
         var promisify = function(transaction) {
             return new Promise(function(resolve, reject) {
                 transaction.oncomplete = resolve;
-                transaction.onerror = reject;
+                transaction.onerror = function(e) {
+                    e.preventDefault(); // Needed for Firefox (https://bugzilla.mozilla.org/show_bug.cgi?id=872873)
+                    reject(e);
+                };
             });
         };
 

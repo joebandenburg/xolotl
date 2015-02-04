@@ -9,14 +9,11 @@
         this.openDatabase = function() {
             return new Promise(function(resolve, reject) {
                 var request = window.indexedDB.open(dbName);
-                console.log("open the db");
                 request.onsuccess = function(event) {
-                    console.log("onsuccess");
                     db = request.result;
                     resolve(db);
                 };
                 request.onupgradeneeded = function(event) {
-                    console.log("onupgradeneeded");
                     self.createStore(event.target.result);
                 };
                 request.onerror = reject;
@@ -85,7 +82,6 @@
         */
 
         this.deleteDatabase = function() {
-            console.log("deleting database");
             if (db) {
                 db.close();
             }
