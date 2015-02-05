@@ -12,6 +12,7 @@
         "angular": true,
         "chrome": true,
         "window": true,
-        "IDBKeyRange": true
+        "IDBKeyRange": true,
+        "document" : true
     }
 }

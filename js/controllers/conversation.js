@@ -29,6 +29,11 @@
                 });
             }, function(error) {
                 console.error(error);
+            }).then(function() {
+                document.getElementById("end-of-message-anchor").scrollIntoView({
+                    block: "end",
+                    behavior: "smooth"
+                });
             });
         };
         $scope.updateMessages();
