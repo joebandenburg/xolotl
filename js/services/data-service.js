@@ -1,9 +1,25 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlDataService", ["XolotlDatabaseService"]);
+    var module = angular.module("XolotlDataService", ["XolotlDatabaseService", "XolotlTextSecureService"]);
 
-    module.service("DataService", function($rootScope, DatabaseService) {
+    module.service("DataService", function($rootScope, DatabaseService, TextSecureService) {
+        var self = this;
 
+        $rootScope.$on("newMessageReceived", function(event, message) {
+            addEntity("messageStore", message).then(function() {
+                $rootScope.$broadcast("messagesUpdated", {number: message.number});
+            });
+        });
+
+        /*
+            message = {
+                number: string,
+                body: string,
+                isSelf: boolean,
+                sentTime: int,
+                status: string
+            };
+        */
         this.getAllMessages = function(number) {
             return inTransaction(["messageStore"], function(messageStore) {
                 var index = messageStore.index("number");
@@ -14,10 +30,18 @@
 
         this.addMessage = function(message) {
             return addEntity("messageStore", message).then(function() {
-                $rootScope.$broadcast("newMessage", {number: message.number});
+                $rootScope.$broadcast("messagesUpdated", {number: message.number});
+            }).then(function() {
+                TextSecureService.sendMessage(message.number, message.body);
             });
         };
 
+        /*
+            contact = {
+                name: string,
+                number: string
+            }
+        */
         this.getAllContacts = function() {
             return inTransaction(["contactStore"], function(contactStore) {
                 var index = contactStore.index("name");
