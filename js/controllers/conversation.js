@@ -16,7 +16,7 @@
             console.error(error);
         });
 
-        $rootScope.$on("newMessage", function(messageEvent, args) {
+        $rootScope.$on("messagesUpdated", function(messageEvent, args) {
             if (args.number === $scope.number) {
                 $scope.updateMessages();
             }

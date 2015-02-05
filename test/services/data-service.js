@@ -23,12 +23,6 @@ describe("db-service", function() {
         });
     });
     describe("Contacts", function() {
-        /*
-            contact = {
-                name: string,
-                number: string
-            }
-        */
         it("returns an empty array if the database is empty", function() {
             return service.getAllContacts().then(function(contacts) {
                 assert.deepEqual(contacts, [], "should be empty");
@@ -146,15 +140,6 @@ describe("db-service", function() {
         });
     });
     describe("Messages", function() {
-        /*
-            message = {
-                number: string,
-                body: string,
-                isSelf: boolean,
-                sentTime: int,
-                status: string
-            };
-        */
         var num = "123";
         it("returns an empty array if the database is empty", function() {
             return service.getAllMessages(num).then(function(contacts) {

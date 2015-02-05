@@ -10,6 +10,9 @@
         $scope.deleteConversation = function() {
             DataService.deleteContact($scope.contactNumber)
             .then(function() {
+                return DataService.deleteMessages($scope.contactNumber);
+            })
+            .then(function() {
                     console.log("contact deleted");
                     $scope.$apply(function() {
                         $location.path("/contacts/");
