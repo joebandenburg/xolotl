@@ -30,7 +30,7 @@
 
         this.createStore = function(db) {
             var objectStore = db.createObjectStore("messageStore", {
-                autoIncrement : true
+                keyPath : "sentTime"
             });
             objectStore.createIndex("number", "number", {
                 unique: false
@@ -55,6 +55,22 @@
                         cursor.continue();
                     } else {
                         resolve(objects);
+                    }
+                };
+                request.onerror = reject;
+            });
+        };
+
+        this.getSpecificObject = function(store, index, keyRange, matchingObject) {
+            return new Promise(function(resolve, reject) {
+                var request = index.openKeyCursor(keyRange);
+                request.onsuccess = function() {
+                    var cursor = request.result;
+                    if (cursor) {
+                        store.delete(cursor.primaryKey);
+                        cursor.continue();
+                    } else {
+                        resolve();
                     }
                 };
                 request.onerror = reject;

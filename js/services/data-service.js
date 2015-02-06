@@ -1,8 +1,9 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlDataService", ["XolotlDatabaseService", "XolotlTextSecureService"]);
+    var module = angular.module("XolotlDataService", ["XolotlDatabaseService", "XolotlTextSecureService",
+        "XolotlMessageStatus"]);
 
-    module.service("DataService", function($rootScope, DatabaseService, TextSecureService) {
+    module.service("DataService", function($rootScope, DatabaseService, TextSecureService, MessageStatus) {
         var self = this;
 
         $rootScope.$on("newMessageReceived", function(event, message) {
@@ -32,7 +33,18 @@
             return addEntity("messageStore", message).then(function() {
                 $rootScope.$broadcast("messagesUpdated", {number: message.number});
             }).then(function() {
-                TextSecureService.sendMessage(message.number, message.body);
+                return TextSecureService.sendMessage(message.number, message.body);
+            }).then(function() {
+                // update db with sent
+                message.status = MessageStatus.sent;
+                return self.updateMessage(message);
+            }, function(error) {
+                // update db with failed
+                // show error in ui
+                message.status = MessageStatus.failed;
+                return self.updateMessage(message);
+            }).then(function() {
+                $rootScope.$broadcast("messagesUpdated", {number: message.number});
             });
         };
 
@@ -70,6 +82,12 @@
         this.updateContact = function(contact) {
             return inTransaction(["contactStore"], "readwrite", function(contactStore) {
                 contactStore.put(contact);
+            });
+        };
+
+        this.updateMessage = function(message) {
+            return inTransaction(["messageStore"], "readwrite", function(messageStore) {
+                messageStore.put(message);
             });
         };
 

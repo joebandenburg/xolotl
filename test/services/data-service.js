@@ -1,14 +1,23 @@
 describe("db-service", function() {
     beforeEach(module('XolotlDataService', function($provide) {
         $provide.value("dbName", "test");
+        $provide.service("TextSecureService", function () {
+            this.sendMessage = sinon.stub().returns(Promise.resolve());
+        });
     }));
 
     var service;
     var dbService;
+    var textService;
+    var rootScope;
+    var messageStatus;
 
-    beforeEach(inject(function(DataService, DatabaseService) {
+    beforeEach(inject(function(DataService, DatabaseService, TextSecureService, $rootScope, MessageStatus) {
         service = DataService;
         dbService = DatabaseService;
+        textService = TextSecureService;
+        rootScope = $rootScope;
+        messageStatus = MessageStatus;
     }));
 
     afterEach(function() {
@@ -152,7 +161,7 @@ describe("db-service", function() {
                 body: "hello person",
                 isSelf: true,
                 sentTime: 12345,
-                status: "sent"
+                status: messageStatus.sent
             }).then(function() {
                 return service.getAllMessages(num);
             }).then(function(messages) {
@@ -161,8 +170,70 @@ describe("db-service", function() {
                     body: "hello person",
                     isSelf: true,
                     sentTime: 12345,
-                    status: "sent"
+                    status: messageStatus.sent
                 }]);
+            });
+        });
+        it("add message should update status", function() {
+            return service.addMessage({
+                number: num,
+                body: "hello person",
+                isSelf: true,
+                sentTime: 12345,
+                status: messageStatus.saved
+            }).then(function() {
+                return service.getAllMessages(num);
+            }).then(function(messages) {
+                assert.deepEqual(messages, [{
+                    number: num,
+                    body: "hello person",
+                    isSelf: true,
+                    sentTime: 12345,
+                    status: messageStatus.sent
+                }]);
+            });
+        });
+        it("add message should produce notification events", function() {
+            sinon.spy(rootScope, "$broadcast");
+            return service.addMessage({
+                number: num,
+                body: "hello person",
+                isSelf: true,
+                sentTime: 12345,
+                status: messageStatus.saved
+            }).then(function() {
+                sinon.assert.calledTwice(rootScope.$broadcast);
+            });
+        });
+        it("add message should update status if sending failed", function() {
+            textService.sendMessage.returns(Promise.reject());
+            return service.addMessage({
+                number: num,
+                body: "hello person",
+                isSelf: true,
+                sentTime: 12345,
+                status: messageStatus.saved
+            }).then(function() {
+                return service.getAllMessages(num);
+            }).then(function(messages) {
+                assert.deepEqual(messages, [{
+                    number: num,
+                    body: "hello person",
+                    isSelf: true,
+                    sentTime: 12345,
+                    status: messageStatus.failed
+                }]);
+            });
+        });
+        it("adding a message calls text secure", function() {
+            return service.addMessage({
+                number: num,
+                body: "hello person",
+                isSelf: true,
+                sentTime: 12345,
+                status: messageStatus.sent
+            }).then(function() {
+                sinon.assert.calledOnce(textService.sendMessage);
             });
         });
         it("returns multiple messages", function() {
@@ -171,31 +242,31 @@ describe("db-service", function() {
                 body: "hello person",
                 isSelf: true,
                 sentTime: 12345,
-                status: "sent"
+                status: messageStatus.saved
             }).then(function() {
                 return service.addMessage({
                     number: num,
                     body: "hallo",
                     isSelf: false,
                     sentTime: 12346,
-                    status: "sent"
+                    status: messageStatus.saved
                 });
             }).then(function() {
                 return service.getAllMessages(num);
             }).then(function(messages) {
-                var set = _.sortBy(messages, "name");
+                var set = _.sortBy(messages, "sentTime");
                 assert.deepEqual(set, [{
                     number: num,
                     body: "hello person",
                     isSelf: true,
                     sentTime: 12345,
-                    status: "sent"
+                    status: messageStatus.sent
                 }, {
                     number: num,
                     body: "hallo",
                     isSelf: false,
                     sentTime: 12346,
-                    status: "sent"
+                    status: messageStatus.sent
                 }]);
             });
         });
@@ -205,14 +276,14 @@ describe("db-service", function() {
                 body: "hello person",
                 isSelf: true,
                 sentTime: 12345,
-                status: "sent"
+                status: messageStatus.sent
             }).then(function() {
                 return service.addMessage({
                     number: num,
                     body: "hallo",
                     isSelf: false,
                     sentTime: 12346,
-                    status: "sent"
+                    status: messageStatus.sent
                 });
             }).then(function() {
                 return service.addMessage({
@@ -220,20 +291,20 @@ describe("db-service", function() {
                     body: "other",
                     isSelf: false,
                     sentTime: 12347,
-                    status: "sent"
+                    status: messageStatus.sent
                 });
             }).then(function() {
                 return service.deleteMessages(num);
             }).then(function() {
                 return service.getAllMessages("999");
             }).then(function(messages) {
-                var set = _.sortBy(messages, "name");
+                var set = _.sortBy(messages, "sentTime");
                 assert.deepEqual(set, [{
                     number: "999",
                     body: "other",
                     isSelf: false,
                     sentTime: 12347,
-                    status: "sent"
+                    status: messageStatus.sent
                 }]);
             }).then(function() {
                 return service.getAllMessages(num);

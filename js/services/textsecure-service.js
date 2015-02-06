@@ -10,7 +10,10 @@
             sendMessage: function(number, message) {
                 setTimeout(function() {
                     handleReceiveMessage(number, message);
-                }, 1000);
+                }, 2000);
+                return new Promise(function(resolve, reject) {
+                    setTimeout(resolve, 1000);
+                });
             },
         };
 
@@ -27,7 +30,6 @@
         };
 
         this.sendMessage = function(number, message) {
-            // todo reject promise if failed
             return textSecure.sendMessage(number, message);
         };
     });

@@ -31,6 +31,8 @@
     "karma-chai": "^0.1.0",
     "karma-firefox-launcher": "^0.1.4",
     "karma-mocha": "^0.1.10",
-    "mocha": "^2.1.0"
+    "karma-sinon": "^1.0.4",
+    "mocha": "^2.1.0",
+    "sinon": "^1.12.2"
   }
 }

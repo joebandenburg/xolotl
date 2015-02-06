@@ -1,9 +1,10 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlConversation", ["XolotlColorGenerator", "XolotlDataService"]);
+    var module = angular.module("XolotlConversation", ["XolotlColorGenerator", "XolotlDataService",
+        "XolotlMessageStatus"]);
 
     module.controller("ConversationController", function($scope, $routeParams, $location, $filter,
-        $rootScope, DataService, ColorGenerator) {
+        $rootScope, DataService, ColorGenerator, MessageStatus) {
 
         $scope.number = $routeParams.number;
         $scope.messages = [];
@@ -60,7 +61,7 @@
                 body: $scope.message,
                 isSelf: true,
                 sentTime: Date.now(),
-                status: "success"
+                status: MessageStatus.saved
             };
             DataService.addMessage(message);
             $scope.message = "";
