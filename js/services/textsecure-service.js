@@ -1,8 +1,8 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlTextSecureService", ["XolotlDataService"]);
+    var module = angular.module("XolotlTextSecureService", ["XolotlDataService", "XolotlMessageStatus"]);
 
-    module.service("TextSecureService", function($rootScope) {
+    module.service("TextSecureService", function($rootScope, MessageStatus) {
         var self = this;
 
         //var textSecure = new TextSecure();
@@ -25,7 +25,7 @@
                 body: withMessage,
                 isSelf: false,
                 sentTime: Date.now(),
-                status: "success"
+                status: MessageStatus.received
             });
         };
 
