@@ -1,0 +1,28 @@
+<div class="conversation-window">
+    <div class="toolbar">
+        <div class="toolbar-button" ng-click="back()"><i class="fa fa-angle-left"></i></div>
+        <div class="toolbar-text">Options</div>
+    </div>
+    <div class="options-window" ng-init="loadConfig()">
+
+        <div class="app-option-item" ng-click="notificationsEnabled = !notificationsEnabled">
+            <i class="option-icon fa fa-bell"></i>
+            <div class="option-label">
+                Notifications
+            </div>
+            <div class="option-state" ng-class="{'option-disabled': !notificationsEnabled}">
+                {{notificationsEnabled ? 'Enabled' : 'Disabled'}}
+            </div>
+        </div>
+
+        <div class="app-option-item" ng-click="flashingAttentionEnabled = !flashingAttentionEnabled">
+            <i class="option-icon fa fa-lightbulb-o"></i>
+            <div class="option-label">
+                Flashing Icon
+            </div>
+            <div class="option-state" ng-class="{'option-disabled': !flashingAttentionEnabled}">
+                {{flashingAttentionEnabled ? 'Enabled' : 'Disabled'}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,11 +2,11 @@
     "use strict";
     var module = angular.module("XolotlContacts", ["XolotlColorGenerator", "XolotlDataService"]);
 
-    module.controller("ContactsController", function($scope, $location, $rootScope, $filter,
+    module.controller("ContactsController", function($scope, $location, $filter,
         ColorGenerator, DataService) {
 
         $scope.contextInput = "";
-
+        var self = this;
         DataService.getAllContacts().then(function(data) {
             $scope.$apply(function() {
                 $scope.contacts = data;
@@ -35,6 +35,10 @@
 
         $scope.openConversation = function(contact) {
             $location.path("/contact/" + contact.number);
+        };
+
+        $scope.openOptions = function(contact) {
+            $location.path("/app-options");
         };
 
         $scope.handleContext = function() {

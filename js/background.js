@@ -2,7 +2,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
     "use strict";
 
     chrome.app.window.create("index.html", {
-        "id": "MyWindowID",
+        "id": "XolotlWindow",
         innerBounds: {
             width: 300,
             height: 500,

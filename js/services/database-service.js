@@ -15,6 +15,7 @@
                 };
                 request.onupgradeneeded = function(event) {
                     self.createStore(event.target.result);
+                    // self.addDefaultConfig(event.target.result);
                 };
                 request.onerror = reject;
             });
@@ -42,7 +43,18 @@
             contactStore.createIndex("name", "name", {
                 unique: false
             });
+
+            var configStore = db.createObjectStore("generalStore");
+            configStore.add(true, "notificationsEnabled");
+            configStore.add(true, "flashingAttentionEnabled");
         };
+
+        // this.addDefaultConfig = function(db) {
+        //     var transaction = db.transaction("generalStore", "readwrite");
+        //     var store = transaction.objectStore("generalStore");
+        //     store.add(true, "notificationsEnabled");
+        //     store.add(true, "flashingAttentionEnabled");
+        // };
 
         this.getDataObjects = function(index, keyRange) {
             return new Promise(function(resolve, reject) {
@@ -56,6 +68,16 @@
                     } else {
                         resolve(objects);
                     }
+                };
+                request.onerror = reject;
+            });
+        };
+
+        this.getDataObject = function(store, key) {
+            return new Promise(function(resolve, reject) {
+                var request = store.get(key);
+                request.onsuccess = function() {
+                    resolve(request.result);
                 };
                 request.onerror = reject;
             });

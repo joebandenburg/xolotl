@@ -10,7 +10,7 @@
             sendMessage: function(number, message) {
                 setTimeout(function() {
                     handleReceiveMessage(number, message);
-                }, 2000);
+                }, 5000);
                 return new Promise(function(resolve, reject) {
                     setTimeout(resolve, 1000);
                 });

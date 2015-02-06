@@ -31,10 +31,13 @@
             }, function(error) {
                 console.error(error);
             }).then(function() {
-                document.getElementById("end-of-message-anchor").scrollIntoView({
-                    block: "end",
-                    behavior: "smooth"
-                });
+                var element = document.getElementById("end-of-message-anchor");
+                if (element) {
+                    element.scrollIntoView({
+                        block: "end",
+                        behavior: "smooth"
+                    });
+                }
             });
         };
         $scope.updateMessages();

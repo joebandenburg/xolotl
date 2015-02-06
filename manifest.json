@@ -12,6 +12,6 @@
     "16": "assets/icon-16.png", 
     "128": "assets/icon-rounded-128.png" 
   },
-  "permissions": ["storage", "unlimitedStorage"]
+  "permissions": ["storage", "unlimitedStorage", "notifications"]
 }
   

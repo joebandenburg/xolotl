@@ -1,9 +1,10 @@
 (function() {
     "use strict";
     var module = angular.module("XolotlDataService", ["XolotlDatabaseService", "XolotlTextSecureService",
-        "XolotlMessageStatus"]);
+        "XolotlMessageStatus", "XolotlDefaultConfig"]);
 
-    module.service("DataService", function($rootScope, DatabaseService, TextSecureService, MessageStatus) {
+    module.service("DataService", function($rootScope, DatabaseService, TextSecureService, MessageStatus,
+        DefaultConfig) {
         var self = this;
 
         // DatabaseService.deleteDatabase();
@@ -63,6 +64,14 @@
             });
         };
 
+        this.getContact = function(number) {
+            return self.getAllContacts().then(function(contacts) {
+                return _.find(contacts, function(contact) {
+                    return contact.number === number;
+                });
+            });
+        };
+
         this.addContact = function(contact) {
             return addEntity("contactStore", contact);
         };
@@ -90,6 +99,24 @@
         this.updateMessage = function(message) {
             return inTransaction(["messageStore"], "readwrite", function(messageStore) {
                 messageStore.put(message);
+            });
+        };
+
+        /*
+            item = {
+                key: string,
+                value: object
+            }
+        */
+        this.putGeneralItem = function(item, key) {
+            return inTransaction(["generalStore"], "readwrite", function(generalStore) {
+                generalStore.put(item, key);
+            });
+        };
+
+        this.getGeneralItem = function(key) {
+            return inTransaction(["generalStore"], function(generalStore) {
+                return DatabaseService.getDataObject(generalStore, key);
             });
         };
 

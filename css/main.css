@@ -327,3 +327,43 @@ body {
 .delete-option {
     margin-left: 10px;
 }
+
+.app-option-item {
+    font-size: 16px;
+    /* padding: 0.5em; */
+    border: 1px solid #3C3C3C;
+    margin: 0.5em;
+    /* flex: 1; */
+    display: flex;
+    /*justify-content: center;*/
+}
+
+.option-label {
+    flex: 2;
+    padding: 0.5em; */;
+}
+
+.option-state {
+    flex: 2;
+    text-align: center;
+    background-color: #4DB3C0;
+    color: white;
+    padding: 0.5em; */;
+    height: 100%;
+}
+
+.option-icon {
+    text-align: center;
+    flex: 0.5;
+    padding: 0.5em; */;
+}
+
+.option-disabled {
+    background-color: #BD3463;
+    color: white;
+}
+
+.option-enabled {
+    background-color: #BD3463;
+}
+
