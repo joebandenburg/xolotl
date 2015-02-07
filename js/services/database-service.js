@@ -30,7 +30,7 @@
 
         this.createStore = function(db) {
             var objectStore = db.createObjectStore("messageStore", {
-                autoIncrement : true
+                keyPath : "sentTime"
             });
             objectStore.createIndex("number", "number", {
                 unique: false

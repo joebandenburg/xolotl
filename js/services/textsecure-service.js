@@ -1,8 +1,8 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlTextSecureService", ["XolotlDataService"]);
+    var module = angular.module("XolotlTextSecureService", ["XolotlDataService", "XolotlMessageStatus"]);
 
-    module.service("TextSecureService", function($rootScope) {
+    module.service("TextSecureService", function($rootScope, MessageStatus) {
         var self = this;
 
         //var textSecure = new TextSecure();
@@ -10,7 +10,10 @@
             sendMessage: function(number, message) {
                 setTimeout(function() {
                     handleReceiveMessage(number, message);
-                }, 1000);
+                }, 2000);
+                return new Promise(function(resolve, reject) {
+                    setTimeout(resolve, 1000);
+                });
             },
         };
 
@@ -22,12 +25,11 @@
                 body: withMessage,
                 isSelf: false,
                 sentTime: Date.now(),
-                status: "success"
+                status: MessageStatus.received
             });
         };
 
         this.sendMessage = function(number, message) {
-            // todo reject promise if failed
             return textSecure.sendMessage(number, message);
         };
     });
