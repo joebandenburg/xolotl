@@ -25,7 +25,7 @@
                 body: withMessage,
                 isSelf: false,
                 sentTime: Date.now(),
-                status: MessageStatus.received
+                status: MessageStatus.RECEIVED
             });
         };
 

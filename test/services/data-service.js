@@ -161,7 +161,7 @@ describe("db-service", function() {
                 body: "hello person",
                 isSelf: true,
                 sentTime: 12345,
-                status: messageStatus.sent
+                status: messageStatus.SENT
             }).then(function() {
                 return service.getAllMessages(num);
             }).then(function(messages) {
@@ -170,7 +170,7 @@ describe("db-service", function() {
                     body: "hello person",
                     isSelf: true,
                     sentTime: 12345,
-                    status: messageStatus.sent
+                    status: messageStatus.SENT
                 }]);
             });
         });
@@ -180,11 +180,11 @@ describe("db-service", function() {
                 body: "hello person",
                 isSelf: true,
                 sentTime: 12345,
-                status: messageStatus.saved
+                status: messageStatus.SAVED
             }).then(function() {
                 return service.getAllMessages(num);
             }).then(function(messages) {
-                assert.ok(messages[0].status.value === messageStatus.sent.value);
+                assert.ok(messages[0].status === messageStatus.SENT);
             });
         });
         it("add message should produce notification events", function() {
@@ -194,7 +194,7 @@ describe("db-service", function() {
                 body: "hello person",
                 isSelf: true,
                 sentTime: 12345,
-                status: messageStatus.saved
+                status: messageStatus.SAVED
             }).then(function() {
                 sinon.assert.calledTwice(rootScope.$broadcast);
             });
@@ -206,7 +206,7 @@ describe("db-service", function() {
                 body: "hello person",
                 isSelf: true,
                 sentTime: 12345,
-                status: messageStatus.saved
+                status: messageStatus.SAVED
             }).then(function() {
                 return service.getAllMessages(num);
             }).then(function(messages) {
@@ -215,7 +215,7 @@ describe("db-service", function() {
                     body: "hello person",
                     isSelf: true,
                     sentTime: 12345,
-                    status: messageStatus.failed
+                    status: messageStatus.FAILED
                 }]);
             });
         });
@@ -225,7 +225,7 @@ describe("db-service", function() {
                 body: "hello person",
                 isSelf: true,
                 sentTime: 12345,
-                status: messageStatus.sent
+                status: messageStatus.SENT
             }).then(function() {
                 sinon.assert.calledOnce(textService.sendMessage);
             });
@@ -236,14 +236,14 @@ describe("db-service", function() {
                 body: "hello person",
                 isSelf: true,
                 sentTime: 12345,
-                status: messageStatus.saved
+                status: messageStatus.SAVED
             }).then(function() {
                 return service.addMessage({
                     number: num,
                     body: "hallo",
                     isSelf: false,
                     sentTime: 12346,
-                    status: messageStatus.saved
+                    status: messageStatus.SAVED
                 });
             }).then(function() {
                 return service.getAllMessages(num);
@@ -254,13 +254,13 @@ describe("db-service", function() {
                     body: "hello person",
                     isSelf: true,
                     sentTime: 12345,
-                    status: messageStatus.sent
+                    status: messageStatus.SENT
                 }, {
                     number: num,
                     body: "hallo",
                     isSelf: false,
                     sentTime: 12346,
-                    status: messageStatus.sent
+                    status: messageStatus.SENT
                 }]);
             });
         });
@@ -270,14 +270,14 @@ describe("db-service", function() {
                 body: "hello person",
                 isSelf: true,
                 sentTime: 12345,
-                status: messageStatus.sent
+                status: messageStatus.SENT
             }).then(function() {
                 return service.addMessage({
                     number: num,
                     body: "hallo",
                     isSelf: false,
                     sentTime: 12346,
-                    status: messageStatus.sent
+                    status: messageStatus.SENT
                 });
             }).then(function() {
                 return service.addMessage({
@@ -285,7 +285,7 @@ describe("db-service", function() {
                     body: "other",
                     isSelf: false,
                     sentTime: 12347,
-                    status: messageStatus.sent
+                    status: messageStatus.SENT
                 });
             }).then(function() {
                 return service.deleteMessages(num);
@@ -298,7 +298,7 @@ describe("db-service", function() {
                     body: "other",
                     isSelf: false,
                     sentTime: 12347,
-                    status: messageStatus.sent
+                    status: messageStatus.SENT
                 }]);
             }).then(function() {
                 return service.getAllMessages(num);

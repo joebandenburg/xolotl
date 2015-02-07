@@ -61,7 +61,7 @@
                 body: $scope.message,
                 isSelf: true,
                 sentTime: Date.now(),
-                status: MessageStatus.saved
+                status: MessageStatus.SAVED
             };
             DataService.addMessage(message);
             $scope.message = "";
