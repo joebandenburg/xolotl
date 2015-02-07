@@ -61,22 +61,6 @@
             });
         };
 
-        this.getSpecificObject = function(store, index, keyRange, matchingObject) {
-            return new Promise(function(resolve, reject) {
-                var request = index.openKeyCursor(keyRange);
-                request.onsuccess = function() {
-                    var cursor = request.result;
-                    if (cursor) {
-                        store.delete(cursor.primaryKey);
-                        cursor.continue();
-                    } else {
-                        resolve();
-                    }
-                };
-                request.onerror = reject;
-            });
-        };
-
         this.deleteDataObjects = function(store, index, keyRange) {
             return new Promise(function(resolve, reject) {
                 var request = index.openKeyCursor(keyRange);

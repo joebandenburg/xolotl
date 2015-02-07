@@ -6,6 +6,8 @@
     module.service("DataService", function($rootScope, DatabaseService, TextSecureService, MessageStatus) {
         var self = this;
 
+        // DatabaseService.deleteDatabase();
+
         $rootScope.$on("newMessageReceived", function(event, message) {
             addEntity("messageStore", message).then(function() {
                 $rootScope.$broadcast("messagesUpdated", {number: message.number});

@@ -184,13 +184,7 @@ describe("db-service", function() {
             }).then(function() {
                 return service.getAllMessages(num);
             }).then(function(messages) {
-                assert.deepEqual(messages, [{
-                    number: num,
-                    body: "hello person",
-                    isSelf: true,
-                    sentTime: 12345,
-                    status: messageStatus.sent
-                }]);
+                assert.ok(messages[0].status.value === messageStatus.sent.value);
             });
         });
         it("add message should produce notification events", function() {
