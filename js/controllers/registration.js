@@ -88,7 +88,8 @@
                 $scope.$apply(function() {
                     $scope.status = "success";
                 });
-            }, function() {
+            }, function(error) {
+                console.error(error);
                 $scope.currentError = "verification";
             });
         };
@@ -142,7 +143,8 @@
                 DataService.putGeneralItem(phoneUtils.getRegionCodeForNumber(internationalNumber), "userCountryCode");
                 DataService.putGeneralItem(internationalNumber, "userFullNumber");
                 $location.path("/contacts");
-            }, function() {
+            }, function(error) {
+                console.error(error);
                 $scope.currentError = "registration";
             });
         };

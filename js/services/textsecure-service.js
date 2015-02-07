@@ -1,52 +1,35 @@
 (function() {
     "use strict";
-    var module = angular.module("XolotlTextSecureService", ["XolotlDataService", "XolotlMessageStatus"]);
+    var module = angular.module("XolotlTextSecureService", [
+        "XolotlDataService",
+        "XolotlMessageStatus",
+        "XolotlTextSecureStorageService"
+    ]);
 
-    module.service("TextSecureService", function($rootScope, MessageStatus) {
-        var self = this;
+    module.service("TextSecureService", function($rootScope, MessageStatus, TextSecureStorageService) {
+        var textSecure = window.textsecure(TextSecureStorageService, "textsecure-service-staging.whispersystems.org");
 
-        //var textSecure = new TextSecure();
-        var textSecure = {
-            sendMessage: function(number, message) {
-                setTimeout(function() {
-                    handleReceiveMessage(number, message);
-                }, 5000);
-                return new Promise(function(resolve, reject) {
-                    setTimeout(resolve, 1000);
-                });
-            },
-        };
-
-        textSecure.onreceivemessage = handleReceiveMessage;
-
-        var handleReceiveMessage = function(fromNumber, withMessage) {
+        textSecure.onmessage = function(fromNumber, withMessage, timestamp) {
             $rootScope.$broadcast("newMessageReceived", {
                 number: fromNumber,
                 body: withMessage,
                 isSelf: false,
-                sentTime: Date.now(),
+                sentTime: timestamp,
                 status: MessageStatus.RECEIVED
             });
+        };
+
+        textSecure.onreceipt = function(fromNumber, timestamp) {
+            console.log("Receipt yey!");
         };
 
         this.sendMessage = function(number, message) {
             return textSecure.sendMessage(number, message);
         };
 
-        this.requestVerificationCode = function(number) {
-            console.log("requestVerificationCode");
-            return new Promise(function(resolve, reject) {
-                setTimeout(function() {
-                    resolve();
-                }, 1000);
-            });
-        };
+        this.requestVerificationCode = textSecure.requestVerificationCode;
+        this.registerFirstDevice = textSecure.registerFirstDevice;
 
-        this.registerFirstDevice = function(number, code) {
-            console.log("registerFirstDevice");
-            return Promise.resolve();
-        };
-
-        window.handleReceiveMessage = handleReceiveMessage;
+        window.handleReceiveMessage = textSecure.onmessage;
     });
 })();

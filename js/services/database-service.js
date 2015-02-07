@@ -52,6 +52,10 @@
             var configStore = db.createObjectStore("generalStore");
             configStore.add(true, "notificationsEnabled");
             configStore.add(true, "flashingAttentionEnabled");
+
+            db.createObjectStore("textSecureStore");
+            db.createObjectStore("textSecurePreKeyStore");
+            db.createObjectStore("textSecureSignedPreKeyStore");
         };
 
         this.getDataObjects = function(index, keyRange, direction) {
@@ -94,6 +98,39 @@
                     }
                 };
                 request.onerror = reject;
+            });
+        };
+
+        this.inTransaction = function(stores, mode, callback) {
+            if (!callback) {
+                callback = mode;
+                mode = undefined;
+            }
+            return self.getDatabaseConnection().then(function(db) {
+                var transaction = db.transaction(stores, mode);
+                var storeObjects = stores.map(function(storeName) {
+                    return transaction.objectStore(storeName);
+                });
+                var result = callback.apply(this, storeObjects);
+                return promisify(transaction).then(function() {
+                    return result;
+                });
+            });
+        };
+
+        var promisify = function(transaction) {
+            return new Promise(function(resolve, reject) {
+                transaction.oncomplete = resolve;
+                transaction.onerror = function(e) {
+                    e.preventDefault(); // Needed for Firefox (https://bugzilla.mozilla.org/show_bug.cgi?id=872873)
+                    reject(e);
+                };
+            });
+        };
+
+        this.addEntity = function(storeName, entity) {
+            return self.inTransaction([storeName], "readwrite", function(store) {
+                store.add(entity);
             });
         };
 
