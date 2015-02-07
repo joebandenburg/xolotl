@@ -38,12 +38,12 @@
                 return TextSecureService.sendMessage(message.number, message.body);
             }).then(function() {
                 // update db with sent
-                message.status = MessageStatus.sent;
+                message.status = MessageStatus.SENT;
                 return self.updateMessage(message);
             }, function(error) {
                 // update db with failed
                 // show error in ui
-                message.status = MessageStatus.failed;
+                message.status = MessageStatus.FAILED;
                 return self.updateMessage(message);
             }).then(function() {
                 $rootScope.$broadcast("messagesUpdated", {number: message.number});
