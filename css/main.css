@@ -317,9 +317,6 @@ body {
     /* flex: 1; */
     display: flex;
     justify-content: center;
-}
-
-.option-item:hover {
     color: #fff;
     background-color: #861139;
 }
@@ -367,3 +364,26 @@ body {
     background-color: #BD3463;
 }
 
+.contact-option-label {
+    font-size: 16px;
+    padding: 0.5em;
+    margin: 0.5em;
+    flex: 1;
+    text-align: right;
+}
+
+.contact-option-value {
+    font-size: 16px;
+    padding: 0.5em;
+    border: 1px solid #e2e2e2;
+    margin: 0.5em;
+    flex: 2;
+    justify-content: center;
+    color: #fff;      
+    background-color: #2C7691;
+}
+
+.option-form-item {
+    display: flex;
+
+}

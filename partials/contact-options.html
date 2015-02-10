@@ -1,0 +1,27 @@
+<div class="conversation-window">
+    <div class="toolbar">
+        <div class="toolbar-button" ng-click="openConversation()"><i class="fa fa-angle-left"></i></div>
+        <div class="toolbar-text">Options</div>
+    </div>
+    <div class="options-window">
+        <div class="option-form-item">
+            <div class="contact-option-label">
+                Name
+            </div>
+            <div class="contact-option-value">
+                {{contact.name}}
+            </div>       
+        </div>
+        <div class="option-form-item">
+            <div class="contact-option-label">
+                Number
+            </div>
+            <div class="contact-option-value">
+                {{contact.number}}
+            </div>
+        </div>
+        <div class="option-item" ng-click="deleteConversation()">
+            <i class="fa fa-bomb"></i><div class="delete-option">Delete conversation</div>
+        </div>
+    </div>
+</div>
