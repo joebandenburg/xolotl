@@ -14,13 +14,11 @@
 
         $scope.loadItem = function(item) {
             DataService.getGeneralItem(item).then(function(config) {
-                console.log("config loaded");
                 $scope.$apply(function() {
                     $scope[item] = config;
                 });
             }).then(function() {
                 $scope.$watch(item, function(newValue, oldValue) {
-                    console.log("caught change");
                     DataService.putGeneralItem(newValue, item);
                 });
             });

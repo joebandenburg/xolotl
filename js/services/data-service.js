@@ -1,7 +1,7 @@
 (function() {
     "use strict";
     var module = angular.module("XolotlDataService", ["XolotlDatabaseService", "XolotlTextSecureService",
-        "XolotlMessageStatus", "XolotlDefaultConfig"]);
+        "XolotlMessageStatus"]);
 
     module.service("DataService", function($rootScope, DatabaseService, TextSecureService, MessageStatus,
         DefaultConfig) {
@@ -65,10 +65,8 @@
         };
 
         this.getContact = function(number) {
-            return self.getAllContacts().then(function(contacts) {
-                return _.find(contacts, function(contact) {
-                    return contact.number === number;
-                });
+            return inTransaction(["contactStore"], function(contactStore) {
+                return DatabaseService.getDataObject(contactStore, number);
             });
         };
 

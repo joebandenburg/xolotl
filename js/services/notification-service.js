@@ -25,7 +25,7 @@
                                 self.notify(message.number, message);
                             }
                         }, function (error) {
-                            console.log(error);
+                            console.error(error);
                         });
                     }
                 });
