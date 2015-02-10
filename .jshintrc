@@ -13,6 +13,7 @@
         "chrome": true,
         "window": true,
         "IDBKeyRange": true,
-        "document" : true
+        "document" : true,
+        "_": true
     }
 }

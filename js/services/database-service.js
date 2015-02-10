@@ -42,6 +42,10 @@
             contactStore.createIndex("name", "name", {
                 unique: false
             });
+
+            var configStore = db.createObjectStore("generalStore");
+            configStore.add(true, "notificationsEnabled");
+            configStore.add(true, "flashingAttentionEnabled");
         };
 
         this.getDataObjects = function(index, keyRange) {
@@ -56,6 +60,16 @@
                     } else {
                         resolve(objects);
                     }
+                };
+                request.onerror = reject;
+            });
+        };
+
+        this.getDataObject = function(store, key) {
+            return new Promise(function(resolve, reject) {
+                var request = store.get(key);
+                request.onsuccess = function() {
+                    resolve(request.result);
                 };
                 request.onerror = reject;
             });

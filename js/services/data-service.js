@@ -63,6 +63,12 @@
             });
         };
 
+        this.getContact = function(number) {
+            return inTransaction(["contactStore"], function(contactStore) {
+                return DatabaseService.getDataObject(contactStore, number);
+            });
+        };
+
         this.addContact = function(contact) {
             return addEntity("contactStore", contact);
         };
@@ -90,6 +96,24 @@
         this.updateMessage = function(message) {
             return inTransaction(["messageStore"], "readwrite", function(messageStore) {
                 messageStore.put(message);
+            });
+        };
+
+        /*
+            item = {
+                key: string,
+                value: object
+            }
+        */
+        this.putGeneralItem = function(item, key) {
+            return inTransaction(["generalStore"], "readwrite", function(generalStore) {
+                generalStore.put(item, key);
+            });
+        };
+
+        this.getGeneralItem = function(key) {
+            return inTransaction(["generalStore"], function(generalStore) {
+                return DatabaseService.getDataObject(generalStore, key);
             });
         };
 

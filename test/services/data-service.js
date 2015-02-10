@@ -23,14 +23,7 @@ describe("db-service", function() {
     afterEach(function() {
         return dbService.deleteDatabase();
     });
-
-    describe("addContact", function() {
-        it("works", function() {
-            return service.addContact({
-                number: "1234"
-            });
-        });
-    });
+    
     describe("Contacts", function() {
         it("returns an empty array if the database is empty", function() {
             return service.getAllContacts().then(function(contacts) {
@@ -48,6 +41,24 @@ describe("db-service", function() {
                     number: "1234",
                     name: "Bob"
                 }]);
+            });
+        });
+        it("get a single contact", function() {
+            return service.addContact({
+                number: "1234",
+                name: "Bob"
+            }).then(function() {
+                return service.addContact({
+                    number: "123",
+                    name: "Alice"
+                });
+            }).then(function() {
+                return service.getContact("123");
+            }).then(function(contact) {
+                assert.deepEqual(contact, {
+                    number: "123",
+                    name: "Alice"
+                });
             });
         });
         it("returns multiple contacts", function() {
@@ -304,6 +315,13 @@ describe("db-service", function() {
                 return service.getAllMessages(num);
             }).then(function(messages) {
                 assert.deepEqual([], messages);
+            });
+        });
+    });
+    describe("Config", function() {
+        it("gets default config if there is no config", function() {
+            return service.getGeneralItem("notificationsEnabled").then(function(config) {
+                assert.ok(config);
             });
         });
     });
