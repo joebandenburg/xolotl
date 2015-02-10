@@ -3,8 +3,7 @@
     var module = angular.module("XolotlDataService", ["XolotlDatabaseService", "XolotlTextSecureService",
         "XolotlMessageStatus"]);
 
-    module.service("DataService", function($rootScope, DatabaseService, TextSecureService, MessageStatus,
-        DefaultConfig) {
+    module.service("DataService", function($rootScope, DatabaseService, TextSecureService, MessageStatus) {
         var self = this;
 
         // DatabaseService.deleteDatabase();
