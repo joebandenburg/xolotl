@@ -375,15 +375,28 @@ body {
 .contact-option-value {
     font-size: 16px;
     padding: 0.5em;
-    border: 1px solid #e2e2e2;
+    border-left-style: solid;
+    border-left-color: #BABABA;
+    border-left-width: 1px;
     margin: 0.5em;
     flex: 2;
-    justify-content: center;
-    color: #fff;      
-    background-color: #2C7691;
+    justify-content: center;      
+    background-color: #FFFFFF;
 }
 
 .option-form-item {
     display: flex;
 
+}
+
+.register-button {
+    font-size: 16px;
+    padding: 0.5em;
+    border: 1px solid #e2e2e2;
+    margin: 0.5em;
+    /* flex: 1; */
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    background-color: #1fa67a;
 }

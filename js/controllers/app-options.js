@@ -10,6 +10,7 @@
         $scope.loadConfig = function() {
             $scope.loadItem("notificationsEnabled");
             $scope.loadItem("flashingAttentionEnabled");
+            $scope.loadItem("userNumber");
         };
 
         $scope.loadItem = function(item) {

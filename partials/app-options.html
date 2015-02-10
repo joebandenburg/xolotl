@@ -4,6 +4,14 @@
         <div class="toolbar-text">Options</div>
     </div>
     <div class="options-window" ng-init="loadConfig()">
+        <div class="option-form-item">
+            <div class="contact-option-label">
+                Number
+            </div>
+            <div class="contact-option-value">
+                {{userNumber}}
+            </div>
+        </div>
 
         <div class="app-option-item" ng-click="notificationsEnabled = !notificationsEnabled">
             <i class="option-icon fa fa-bell"></i>

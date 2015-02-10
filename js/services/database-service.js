@@ -106,5 +106,7 @@
                 request.onblocked = reject;
             });
         };
+
+        window.deleteDatabase = self.deleteDatabase;
     });
 })();
