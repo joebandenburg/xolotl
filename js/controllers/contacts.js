@@ -2,26 +2,39 @@
     "use strict";
     var module = angular.module("XolotlContacts", ["XolotlColorGenerator", "XolotlDataService"]);
 
-    module.controller("ContactsController", function($scope, $location, $filter,
+    module.controller("ContactsController", function($scope, $location, $rootScope,
         ColorGenerator, DataService) {
 
         $scope.contextInput = "";
         var self = this;
 
-        DataService.getAllContacts().then(function(data) {
-            $scope.$apply(function() {
-                $scope.contacts = data;
-                $scope.filteredContacts = $filter("filter")($scope.contacts, $scope.contextInput);
+        $scope.loadContacts = function() {
+            DataService.getAllContacts().then(function(data) {
+                $scope.$apply(function() {
+                    $scope.contacts = data;
+                    $scope.filterContacts();
+                });
+            }, function(error) {
+                console.error(error);
             });
-        }, function(error) {
-            console.error(error);
-        });
+        };
 
         $scope.$watch("contextInput", function(newValue, oldValue) {
             if ($scope.contacts) {
-                $scope.filteredContacts = $filter("filter")($scope.contacts, $scope.contextInput);
+                $scope.filterContacts();
             }
         });
+
+        $rootScope.$on("contactsUpdated", function(messageEvent, args) {
+            $scope.loadContacts();
+        });
+
+        $scope.filterContacts = function() {
+            var matchingText = $scope.contextInput;
+            $scope.filteredContacts = _.filter($scope.contacts, function(contact) {
+                return matchingText === "" || _.indexOf(contact.name, matchingText) === 0;
+            });
+        };
 
         $scope.addContact = function() {
             var data = $scope.contextInput ? $scope.contextInput : "";

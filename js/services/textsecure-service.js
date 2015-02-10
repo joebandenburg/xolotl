@@ -32,5 +32,7 @@
         this.sendMessage = function(number, message) {
             return textSecure.sendMessage(number, message);
         };
+
+        window.handleReceiveMessage = handleReceiveMessage;
     });
 })();

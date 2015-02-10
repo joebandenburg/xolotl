@@ -9,6 +9,17 @@
         // DatabaseService.deleteDatabase();
 
         $rootScope.$on("newMessageReceived", function(event, message) {
+            self.getContact(message.number).then(function(contact) {
+                if (!contact) {
+                    self.addContact({
+                        name: "",
+                        number: message.number,
+                        lastMessage: ""
+                    }).then(function() {
+                        $rootScope.$broadcast("contactsUpdated", {number: message.number});
+                    });
+                }
+            });
             addEntity("messageStore", message).then(function() {
                 $rootScope.$broadcast("messagesUpdated", {number: message.number});
             });
