@@ -19,7 +19,7 @@
             controller: "ConversationController"
         });
         $routeProvider.when("/options/:number", {
-            templateUrl: "partials/options.html",
+            templateUrl: "partials/contact-options.html",
             controller: "OptionController"
         });
         $routeProvider.when("/app-options", {
