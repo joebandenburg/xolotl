@@ -7,6 +7,7 @@
 
         $scope.contextInput = "";
         var self = this;
+
         DataService.getAllContacts().then(function(data) {
             $scope.$apply(function() {
                 $scope.contacts = data;

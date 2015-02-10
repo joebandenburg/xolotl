@@ -3,7 +3,7 @@
     var app = angular.module("XolotlApp",
         ["ngRoute", "XolotlContacts", "XolotlConversation", "XolotlOption",
         "XolotlAddConversation", "XolotlEnter", "XolotlNotificationService",
-        "XolotlAppOption"]);
+        "XolotlAppOption", "XolotlRegistration", "XolotlDataService"]);
 
     app.config(function($routeProvider) {
         $routeProvider.when("/contacts", {
@@ -26,14 +26,25 @@
             templateUrl: "partials/app-options.html",
             controller: "AppOptionController"
         });
+        $routeProvider.when("/registration", {
+            templateUrl: "partials/registration.html",
+            controller: "RegistrationController"
+        });
         $routeProvider.otherwise({
             redirectTo: "/contacts"
         });
     });
     app.value("dbName", "XolotlDatabase");
 
-    app.run(function(NotificationService) {
-        //causes an instance of the service to be created
+    app.run(function(NotificationService, DataService, $location) {
+        //causes an instance of the notification service to be created
+
+        // early check to see if registration is required
+        DataService.getGeneralItem("userNumber").then(function(userNumber) {
+            if (!userNumber) {
+                $location.path("/registration");
+            }
+        });
     });
 
 })();
