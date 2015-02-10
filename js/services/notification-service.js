@@ -10,7 +10,6 @@
         $rootScope.$on("newMessageReceived", function(event, message) {
             var appWindow = chrome.app.window.get(windowId);
             if (appWindow.isMinimized()) {
-
                 DataService.getGeneralItem("flashingAttentionEnabled").then(function(config) {
                     if (config) {
                         appWindow.drawAttention();
