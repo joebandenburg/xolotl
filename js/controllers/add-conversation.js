@@ -73,7 +73,7 @@
                     }).then(function() {
                         console.log("successfully added a contact");
                         $scope.$apply(function() {
-                            $location.path("/contacts");
+                            $location.path("/contact/" + $scope.contact.number);
                         });
                     }, function(error) {
                         console.error("failed to add a contact " + error);
