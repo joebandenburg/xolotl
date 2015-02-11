@@ -9,9 +9,9 @@
         $scope.number = $routeParams.number;
         $scope.messages = [];
 
-        DataService.getAllContacts().then(function(contacts) {
+        DataService.getContact($scope.number).then(function(contact) {
             $scope.$apply(function() {
-                $scope.contact = $filter("filter")(contacts, {number: $scope.number}, true)[0];
+                $scope.contact = contact;
             });
         }, function(error) {
             console.error(error);
