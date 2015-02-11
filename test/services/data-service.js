@@ -158,6 +158,31 @@ describe("db-service", function() {
                 // should fail!
             });
         });
+        it("getAllContactsByLatestMessage returns contacts that are in order of mostRecentMessage", function() {
+            return service.addContact({
+                number: "123",
+                name: "Bob",
+                mostRecentMessage: 2
+            }).then(function() {
+                return service.addContact({
+                    number: "1234",
+                    name: "Alice",
+                    mostRecentMessage: 1
+                });
+            }).then(function() {
+                return service.getAllContactsByLatestMessage();
+            }).then(function(contacts) {
+                assert.deepEqual(contacts, [{
+                    number: "123",
+                    name: "Bob",
+                    mostRecentMessage: 2
+                }, {
+                    number: "1234",
+                    name: "Alice",
+                    mostRecentMessage: 1
+                }]);
+            });
+        });
     });
     describe("Messages", function() {
         var num = "123";

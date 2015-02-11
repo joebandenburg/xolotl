@@ -9,15 +9,18 @@
         $scope.number = $routeParams.number;
         $scope.messages = [];
 
-        DataService.getAllContacts().then(function(contacts) {
+        DataService.getContact($scope.number).then(function(contact) {
             $scope.$apply(function() {
-                $scope.contact = $filter("filter")(contacts, {number: $scope.number}, true)[0];
+                $scope.contact = contact;
             });
         }, function(error) {
             console.error(error);
+        }).then(function() {
+            $scope.contact.lastReadMessage = $scope.contact.mostRecentMessage;
+            DataService.updateContact($scope.contact);
         });
 
-        $rootScope.$on("messagesUpdated", function(messageEvent, args) {
+        $scope.$on("messagesUpdated", function(messageEvent, args) {
             if (args.number === $scope.number) {
                 $scope.updateMessages();
             }
@@ -38,6 +41,11 @@
                         behavior: "smooth"
                     });
                 }
+                if ($scope.messages.length > 0) {
+                    $scope.contact.mostRecentMessage = $scope.messages[$scope.messages.length - 1].sentTime;
+                    $scope.contact.lastReadMessage = $scope.messages[$scope.messages.length - 1].sentTime;
+                }
+                DataService.updateContact($scope.contact);
             });
         };
         $scope.updateMessages();

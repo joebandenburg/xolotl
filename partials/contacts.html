@@ -9,7 +9,7 @@
         <input class="context-input" placeholder="Search query..." type="text" ng-enter="handleContext()" ng-model="contextInput">
     </div>
     <div class="contact-list">
-        <div class="contact-item" ng-repeat="contact in filteredContacts" ng-click="openConversation(contact)">
+        <div class="contact-item" ng-class="{'contact-unread': (contact.mostRecentMessage !== contact.lastReadMessage)}" ng-repeat="contact in filteredContacts" ng-click="openConversation(contact)">
             <div class="contact-picture" ng-style="{{contactStyle(contact.number)}}">{{contact.name.charAt(0)}}</div>
             <div>
                 <div class="contact-value" >{{ contact.name || contact.number}}</div>

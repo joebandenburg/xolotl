@@ -6,23 +6,24 @@
     module.service("DataService", function($rootScope, DatabaseService, TextSecureService, MessageStatus) {
         var self = this;
 
-        // DatabaseService.deleteDatabase();
-
         $rootScope.$on("newMessageReceived", function(event, message) {
-            self.getContact(message.number).then(function(contact) {
-                if (!contact) {
-                    self.addContact({
-                        name: "",
-                        number: message.number,
-                        lastMessage: ""
-                    }).then(function() {
-                        $rootScope.$broadcast("contactsUpdated", {number: message.number});
-                    });
-                }
-            });
             addEntity("messageStore", message).then(function() {
                 $rootScope.$broadcast("messagesUpdated", {number: message.number});
+                self.getContact(message.number).then(function(contact) {
+                    if (!contact) {
+                        contact = {
+                            name: "",
+                            number: message.number,
+                            mostRecentMessage: message.sentTime,
+                            lastReadMessage: 0
+                        };
+                    } else {
+                        contact.mostRecentMessage = message.sentTime;
+                    }
+                    return self.updateContact(contact);
+                });
             });
+
         });
 
         /*
@@ -42,35 +43,45 @@
             });
         };
 
+        this.getMessage = function(number, sentTime) {
+            return inTransaction(["messageStore"], function(messageStore) {
+                var index = messageStore.index("number, sentTime");
+                return DatabaseService.getDataObject(index, [number, sentTime]);
+            });
+        };
+
         this.addMessage = function(message) {
             return addEntity("messageStore", message).then(function() {
                 $rootScope.$broadcast("messagesUpdated", {number: message.number});
-            }).then(function() {
                 return TextSecureService.sendMessage(message.number, message.body);
             }).then(function() {
-                // update db with sent
                 message.status = MessageStatus.SENT;
                 return self.updateMessage(message);
             }, function(error) {
-                // update db with failed
-                // show error in ui
                 message.status = MessageStatus.FAILED;
                 return self.updateMessage(message);
-            }).then(function() {
-                $rootScope.$broadcast("messagesUpdated", {number: message.number});
             });
         };
 
         /*
             contact = {
                 name: string,
-                number: string
+                number: string,
+                mostRecentMessage: number,
+                lastReadMessage: number
             }
         */
         this.getAllContacts = function() {
             return inTransaction(["contactStore"], function(contactStore) {
                 var index = contactStore.index("name");
                 return DatabaseService.getDataObjects(index);
+            });
+        };
+
+        this.getAllContactsByLatestMessage = function() {
+            return inTransaction(["contactStore"], function(contactStore) {
+                var index = contactStore.index("mostRecentMessage");
+                return DatabaseService.getDataObjects(index, null, "prev");
             });
         };
 
@@ -101,12 +112,16 @@
         this.updateContact = function(contact) {
             return inTransaction(["contactStore"], "readwrite", function(contactStore) {
                 contactStore.put(contact);
+            }).then(function() {
+                $rootScope.$broadcast("contactsUpdated", {number: contact.number});
             });
         };
 
         this.updateMessage = function(message) {
             return inTransaction(["messageStore"], "readwrite", function(messageStore) {
                 messageStore.put(message);
+            }).then(function() {
+                $rootScope.$broadcast("messagesUpdated", {number: message.number});
             });
         };
 

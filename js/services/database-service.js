@@ -35,11 +35,17 @@
             objectStore.createIndex("number", "number", {
                 unique: false
             });
+            objectStore.createIndex("number, sentTime", ["number", "sentTime"], {
+                unique: false
+            });
 
             var contactStore = db.createObjectStore("contactStore", {
                 keyPath: "number"
             });
             contactStore.createIndex("name", "name", {
+                unique: false
+            });
+            contactStore.createIndex("mostRecentMessage", "mostRecentMessage", {
                 unique: false
             });
 
@@ -48,10 +54,10 @@
             configStore.add(true, "flashingAttentionEnabled");
         };
 
-        this.getDataObjects = function(index, keyRange) {
+        this.getDataObjects = function(index, keyRange, direction) {
             return new Promise(function(resolve, reject) {
                 var objects = [];
-                var request = index.openCursor(keyRange);
+                var request = index.openCursor(keyRange, direction);
                 request.onsuccess = function(event) {
                     var cursor = event.target.result;
                     if (cursor) {
