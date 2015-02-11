@@ -52,14 +52,14 @@ body {
 
 .contact-list {
     flex: 1;
-    background: #E4E4E4;
+    background: #E0E0E0;
     overflow-y: scroll;
 }
 
 .contact-item {
     cursor: pointer;
     height: 70px;
-    background: white;
+    background: rgb(255, 255, 255);
     border-top-style: solid;
     border-top-color: #D3D3D3;
     border-top-width: 1px;
@@ -233,12 +233,13 @@ body {
 }
 
 .contact-last-message {
-    color: #909090;
+    color: #000000;
     overflow: hidden;
     height: 18px;
     padding-left: 8px;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-weight: 400;
 }
 
 
@@ -399,4 +400,13 @@ body {
     justify-content: center;
     color: #fff;
     background-color: #1fa67a;
+}
+
+.contact-unread {
+    font-weight: 600;
+}
+
+.contact-unread .contact-last-message {
+    color: #333;
+    font-weight: 400;
 }

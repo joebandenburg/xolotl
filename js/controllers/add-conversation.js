@@ -69,14 +69,14 @@
                     DataService.addContact({
                         name: $scope.contact.name,
                         number: $scope.contact.number,
-                        lastMessage: ""
+                        mostRecentMessage: 0,
+                        lastReadMessage: 0
                     }).then(function() {
-                        console.log("successfully added a contact");
                         $scope.$apply(function() {
                             $location.path("/contact/" + $scope.contact.number);
                         });
                     }, function(error) {
-                        console.error("failed to add a contact " + error);
+                        console.error("failed to add a contact ", error);
                     });
                 }
             };

@@ -15,6 +15,9 @@
             });
         }, function(error) {
             console.error(error);
+        }).then(function() {
+            $scope.contact.lastReadMessage = $scope.contact.mostRecentMessage;
+            DataService.updateContact($scope.contact);
         });
 
         $scope.$on("messagesUpdated", function(messageEvent, args) {
@@ -38,6 +41,11 @@
                         behavior: "smooth"
                     });
                 }
+                if ($scope.messages.length > 0) {
+                    $scope.contact.mostRecentMessage = $scope.messages[$scope.messages.length - 1].sentTime;
+                    $scope.contact.lastReadMessage = $scope.messages[$scope.messages.length - 1].sentTime;
+                }
+                DataService.updateContact($scope.contact);
             });
         };
         $scope.updateMessages();

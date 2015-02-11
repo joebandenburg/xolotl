@@ -9,9 +9,19 @@
         var self = this;
 
         $scope.loadContacts = function() {
-            DataService.getAllContacts().then(function(data) {
+            DataService.getAllContactsByLatestMessage().then(function(contacts) {
+                var promises = contacts.map(function(contact) {
+                    if (contact.mostRecentMessage !== 0) {
+                        return DataService.getMessage(contact.number, contact.mostRecentMessage)
+                        .then(function(message) {
+                            $scope.$apply(function() {
+                                contact.lastMessage = message.body;
+                            });
+                        });
+                    }
+                });
                 $scope.$apply(function() {
-                    $scope.contacts = data;
+                    $scope.contacts = contacts;
                     $scope.filterContacts();
                 });
             }, function(error) {
