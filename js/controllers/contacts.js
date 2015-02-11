@@ -25,7 +25,7 @@
             }
         });
 
-        $rootScope.$on("contactsUpdated", function(messageEvent, args) {
+        $scope.$on("contactsUpdated", function(messageEvent, args) {
             $scope.loadContacts();
         });
 
