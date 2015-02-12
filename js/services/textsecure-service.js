@@ -33,6 +33,20 @@
             return textSecure.sendMessage(number, message);
         };
 
+        this.requestVerificationCode = function(number) {
+            console.log("requestVerificationCode");
+            return new Promise(function(resolve, reject) {
+                setTimeout(function() {
+                    resolve();
+                }, 1000);
+            });
+        };
+
+        this.registerFirstDevice = function(number, code) {
+            console.log("registerFirstDevice");
+            return Promise.resolve();
+        };
+
         window.handleReceiveMessage = handleReceiveMessage;
     });
 })();
