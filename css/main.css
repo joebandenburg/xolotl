@@ -149,10 +149,6 @@ body {
     flex: 1;
 }
 
-.ng-hide {
-    display: none;
-}
-
 .message-item {
     display: flex;
     justify-content: flex-start;
@@ -256,13 +252,12 @@ body {
 }
 
 .add-contact-input {
-    background: #fff;
+    background: #FFFFFF;
     color: #000;
     font-size: 16px;
     padding-left: 1em;
     border: none;
-    width: 80%;
-    margin-top: 30px;
+    margin-top: 10px;
     border-bottom-style: solid;
     border-bottom-color: #C3C3C3;
     border-bottom-width: 1px;
@@ -394,12 +389,10 @@ body {
     font-size: 16px;
     padding: 0.5em;
     border: 1px solid #e2e2e2;
-    margin: 0.5em;
-    /* flex: 1; */
-    display: flex;
-    justify-content: center;
-    color: #fff;
+    margin: 2em 1em 1em 1em;
+    cursor: pointer;
     background-color: #1fa67a;
+    color: #fff;
 }
 
 .contact-unread {
@@ -409,4 +402,61 @@ body {
 .contact-unread .contact-last-message {
     color: #333;
     font-weight: 400;
+}
+
+.register-label {
+    color: #000;
+    font-size: 19px;
+    font-weight: 500;
+    width: 80%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.register-submit-button {
+    font-size: 16px;
+    padding: 0.5em;
+    border: 1px solid #e2e2e2;
+    margin: 2em 1em 1em 1em;
+    justify-content: center;
+    background-color: #1FA67A;
+    cursor: pointer;
+    color:  white;
+}
+
+.registration-input-form {
+    background: #FFFFFF;
+    color: #000;
+    font-size: 16px;
+    border: none;
+    margin-top: 10px;
+    border-bottom-style: solid;
+    border-bottom-color: #C3C3C3;
+    border-bottom-width: 1px;
+    padding: 0.7em;
+}
+
+.button-icon {
+    padding-right: 0.5em;
+}
+
+.registration-error {
+    color: white;
+    padding: 10px;
+    background-color: #444;
+    text-align: center;
+}
+
+.registration-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sent-code-success {
+    font-size: 16px;
+}
+
+.ng-hide {
+    display: none;
 }
