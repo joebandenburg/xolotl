@@ -3,11 +3,16 @@
         <a class="toolbar-button" href="#/contacts"><i class="fa fa-angle-left"></i></a>
         <div class="toolbar-text">Add Conversation</div>
     </div>
+
     <div class="contact-input-area">
         <div class="contact-picture" ng-style="contactStyle(contact.number)">{{contact.name.charAt(0)}}</div>
-        <input id="name-input" class="add-contact-input" placeholder="Name" ng-class="{ 'input-error' : isValidInput(contact.name)}" type="text" ng-model="contact.name">
-        <input id="number-input" class="add-contact-input" placeholder="Number" ng-enter="confirm()" ng-class="{ 'input-error' : isValidInput(contact.number)}" type="text" ng-model="contact.number">
+        <input id="name-input" class="add-contact-input" placeholder="Name" ng-class="{ 'input-error' : isNameValid(contact.name)}" type="text" ng-model="contact.name">
+        <div class="registration-error" ng-hide="currentError !== 'nameError'">Contact name is empty.</div>
+        <input id="number-input" class="add-contact-input" placeholder="Number" ng-enter="confirm()" ng-class="{ 'input-error' : isPhoneNumberValidInput(contact.number)}" type="text" ng-model="contact.number">
+        <div class="registration-error" ng-hide="currentError !== 'phoneNumberError'">Number is invalid for {{location}}. Use the full international number if the number is not from {{location}}.</div>
+        <div class="registration-error" ng-hide="currentError !== 'dbError'">There was a system error saving the contact! Restart the app and try again...</div>
     </div>
+
     <div class="button-footer">
         <button ng-click="confirm()"><i class="fa fa-check"></i></button>
         <div class="divider"></div>

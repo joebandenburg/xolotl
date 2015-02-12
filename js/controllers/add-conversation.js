@@ -5,29 +5,30 @@
     module.controller("AddConversationController",
         function($scope, $routeParams, $location, ColorGenerator, DataService) {
 
-            $scope.data = $routeParams.data;
-
             $scope.contact = {
                 name: "",
                 number: ""
             };
 
-            $scope.tryingToConfirm = false;
-            $scope.invalidInput = "";
+            $scope.location = "";
+
+            var phoneUtils = window.phoneUtils;
+
+            DataService.getGeneralItem("userCountryCode").then(function(countryCode) {
+                $scope.$apply(function() {
+                    $scope.location = countryCode;
+                });
+            });
 
             var isNumber = function(data) {
                 return !isNaN(parseFloat(data)) && isFinite(data);
             };
 
-            if (isNumber($scope.data)) {
-                $scope.contact.number = $scope.data;
+            if (isNumber($routeParams.data)) {
+                $scope.contact.number = $routeParams.data;
             } else {
-                $scope.contact.name = $scope.data;
+                $scope.contact.name = $routeParams.data;
             }
-
-            $scope.openOptions = function() {
-                $location.path("/options/" + $routeParams.number);
-            };
 
             $scope.contactStyle = function(number) {
                 return {
@@ -39,46 +40,52 @@
                 $location.path("/contacts");
             };
 
-            var isContactValid = function(contact) {
-                if (!contact.name) {
-                    $scope.invalidInput = contact.name;
-                    return false;
-                }
-                if (!contact.number) {
-                    $scope.invalidInput = contact.number;
-                    return false;
-                }
-                if (!isNumber(contact.number)) {
-                    $scope.invalidInput = contact.number;
-                    return false;
-                }
-                return true;
+            var isPhoneNumberValid = function(number) {
+                return number && isE164Number(number) || isValidNumberForRegion(number, $scope.location);
             };
 
-            $scope.isValidInput = function(input) {
-                if (!$scope.tryingToConfirm) {
+            var isNameValid = function(name) {
+                return name && name !== "";
+            };
+
+            var isE164Number = function(input) {
+                try {
+                    return phoneUtils.isValidNumber(input) && (phoneUtils.formatE164(input) === input);
+                } catch (e) {
                     return false;
-                } else {
-                    return $scope.invalidInput === input;
+                }
+            };
+
+            var isValidNumberForRegion = function(number, region) {
+                try {
+                    return phoneUtils.isValidNumberForRegion(number, region);
+                } catch (e) {
+                    return false;
                 }
             };
 
             $scope.confirm = function() {
                 $scope.tryingToConfirm = true;
-                if (isContactValid($scope.contact)) {
-                    DataService.addContact({
-                        name: $scope.contact.name,
-                        number: $scope.contact.number,
-                        mostRecentMessage: 0,
-                        lastReadMessage: 0
-                    }).then(function() {
-                        $scope.$apply(function() {
-                            $location.path("/contact/" + $scope.contact.number);
-                        });
-                    }, function(error) {
-                        console.error("failed to add a contact ", error);
-                    });
+                if (!isNameValid($scope.contact.name)) {
+                    $scope.currentError = "nameError";
+                    return;
                 }
+                if (!isPhoneNumberValid($scope.contact.number)) {
+                    $scope.currentError = "phoneNumberError";
+                    return;
+                }
+                DataService.addContact({
+                    name: $scope.contact.name,
+                    number: $scope.contact.number,
+                    mostRecentMessage: 0,
+                    lastReadMessage: 0
+                }).then(function() {
+                    $scope.$apply(function() {
+                        $location.path("/contact/" + $scope.contact.number);
+                    });
+                }, function() {
+                    $scope.currentError = "dbError";
+                });
             };
         });
 })();
