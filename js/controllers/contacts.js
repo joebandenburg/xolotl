@@ -41,9 +41,13 @@
 
         $scope.filterContacts = function() {
             var matchingText = $scope.contextInput;
-            $scope.filteredContacts = _.filter($scope.contacts, function(contact) {
-                return matchingText === "" || _.indexOf(contact.name, matchingText) === 0;
-            });
+            if (matchingText === "") {
+                $scope.filteredContacts = $scope.contacts;
+            } else {
+                $scope.filteredContacts = _.filter($scope.contacts, function(contact) {
+                    return _.includes(contact.name.toUpperCase(), matchingText.toUpperCase());
+                });
+            }
         };
 
         $scope.addContact = function() {
