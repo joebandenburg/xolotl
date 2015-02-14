@@ -72,6 +72,11 @@ body {
     font-size: 16px;
     flex-grow: 1;
     padding-left: 8px;
+    font-weight: 400;
+}
+
+.contact-unread .contact-value {
+    font-weight: 600;
 }
 
 .add-contact-form {
@@ -231,11 +236,10 @@ body {
 .contact-last-message {
     color: #000000;
     overflow: hidden;
-    height: 18px;
     padding-left: 8px;
     white-space: nowrap;
     text-overflow: ellipsis;
-    font-weight: 400;
+    font-size: 14px;
 }
 
 
@@ -445,6 +449,7 @@ body {
     padding: 10px;
     background-color: #444;
     text-align: center;
+    width: 100%;
 }
 
 .registration-list {
