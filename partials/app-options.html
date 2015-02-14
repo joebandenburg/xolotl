@@ -18,7 +18,7 @@
             <div class="option-label">
                 Notifications
             </div>
-            <div class="option-state" ng-class="{'option-disabled': !notificationsEnabled}">
+            <div class="option-state" ng-class="{'option-disabled': !notificationsEnabled}" ng-hide="notificationsEnabled == undefined">
                 {{notificationsEnabled ? 'Enabled' : 'Disabled'}}
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="option-label">
                 Flashing Icon
             </div>
-            <div class="option-state" ng-class="{'option-disabled': !flashingAttentionEnabled}">
+            <div class="option-state" ng-class="{'option-disabled': !flashingAttentionEnabled}" ng-hide="notificationsEnabled == undefined">
                 {{flashingAttentionEnabled ? 'Enabled' : 'Disabled'}}
             </div>
         </div>

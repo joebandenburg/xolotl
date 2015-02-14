@@ -66,6 +66,7 @@ body {
     flex-direction: row;
     display: flex;
     align-items: center;
+    -webkit-transition: all 2s ease-in-out;
 }
 
 .contact-value {
