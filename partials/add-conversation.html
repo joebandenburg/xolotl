@@ -1,16 +1,19 @@
-<div class="add-conversation-window">
-    <div class="toolbar">
-        <a class="toolbar-button" href="#/contacts"><i class="fa fa-angle-left"></i></a>
-        <div class="toolbar-text">Add Conversation</div>
-    </div>
-    <div class="contact-input-area">
-        <div class="contact-picture" ng-style="contactStyle(contact.number)">{{contact.name.charAt(0)}}</div>
-        <input id="name-input" class="add-contact-input" placeholder="Name" ng-class="{ 'input-error' : isValidInput(contact.name)}" type="text" ng-model="contact.name">
-        <input id="number-input" class="add-contact-input" placeholder="Number" ng-enter="confirm()" ng-class="{ 'input-error' : isValidInput(contact.number)}" type="text" ng-model="contact.number">
-    </div>
-    <div class="button-footer">
-        <button ng-click="confirm()"><i class="fa fa-check"></i></button>
-        <div class="divider"></div>
-        <button ng-click="cancel()" ><i class="fa fa-times"></i></button>
-    </div>
+<div class="toolbar">
+    <a href="#/contacts" class="md md-arrow-back"></a>
+    <div class="title">Add contact</div>
 </div>
+<form name="form" novalidate>
+    <div class="form-group">
+        <div class="contact-picture" ng-style="contactStyle(contact.number)">{{contact.name.charAt(0)}}</div>
+    </div>
+    <div class="form-group">
+        <input type="text" ng-model="contact.name" placeholder="Name"/>
+    </div>
+    <div class="form-group">
+        <input type="text" ng-model="contact.number" placeholder="Phone number" required/>
+        <div class="helper-text">Local or international number.</div>
+    </div>
+    <div class="form-group">
+        <button class="primary-button" ng-click="confirm()">Add</button>
+    </div>
+</form>

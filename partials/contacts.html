@@ -1,25 +1,25 @@
-<div class="contact-window" ng-init="loadContacts()">
-    <div class="toolbar">
-        <div class="toolbar-text"></div>
-        <div class="toolbar-options" ng-click="openOptions()">
-            <i class="fa fa-cog" ></i>            
-        </div>
+<div class="toolbar">
+    <div class="title">Contacts</div>
+    <a href="#/app-options" class="fa fa-cog"></a>
     </div>
-    <div class="add-contact-form">
-        <input class="context-input" placeholder="Search query..." type="text" ng-enter="handleContext()" ng-model="contextInput">
-    </div>
-    <div class="contact-list">
-        <div class="contact-item" ng-class="{'contact-unread': (contact.mostRecentMessage !== contact.lastReadMessage)}" ng-repeat="contact in filteredContacts" ng-click="openConversation(contact)">
-            <div class="contact-picture" ng-style="{{contactStyle(contact.number)}}">{{contact.name.charAt(0)}}</div>
-            <div>
-                <div class="contact-value" >{{ contact.name || contact.number}}</div>
-                <div class="contact-last-message" >{{contact.lastMessage}}</div>
-            </div>
+</div>
+<form class="search-form" ng-submit="addContact()">
+    <i class="fa fa-search"></i>
+    <input type="text" placeholder="Search" ng-model="contextInput">
+</form>
+<div class="list">
+    <a class="list-item" ng-class="{'contact-unread': (contact.mostRecentMessage !== contact.lastReadMessage)}" ng-repeat="contact in filteredContacts" ng-click="openConversation(contact)">
+        <div class="contact-picture" ng-style="{{contactStyle(contact.number)}}">{{contact.name.charAt(0)}}</div>
+        <div>
+            <div class="list-title">{{ contact.name || contact.number}}</div>
+            <div class="list-caption">{{contact.lastMessage}}</div>
         </div>
-        <div ng-hide="filteredContacts.length || !contacts" ng-click="addContact()">
-            <div class="add-contact-message">
-                Add new contact
-            </div>
+    </a>
+    <a class="list-item" ng-hide="filteredContacts.length || !contacts" ng-click="addContact()">
+        <div class="contact-picture">?</div>
+        <div>
+            <div class="list-title">{{contextInput}}</div>
+            <div class="list-caption">Add new contact</div>
         </div>
-    </div>
+    </a>
 </div>

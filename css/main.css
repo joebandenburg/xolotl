@@ -1,3 +1,5 @@
+/* Global */
+
 * {
     box-sizing: border-box;
 }
@@ -5,128 +7,449 @@
 body {
     font-family: "roboto";
     font-weight: 300;
+    font-size: 13px;
 }
 
-.add-contact-message {
-    height: 50px;
-    border-top-color: #C7C7C7;
-    background: #FFF;
-    border-top-style: solid;
-    border-top-width: 1px;
-    font-size: 20px;
-    align-items: center;
-    display: flex;
-    font-weight: 400;
-    justify-content: center;
+a {
+    color: #ede9c2;
     cursor: pointer;
 }
 
-.add-contact-value {
-    height: 40px;    background: #FFF;      
-    font-size: 24px;  align-items: center;  display: flex;  justify-content: center;
-    cursor: pointer;
+.dark :focus,
+.toolbar :focus {
+    outline-color: #ede9c2;
 }
-.contact-window {
+
+:focus {
+    outline-color: #2d454d;
+}
+
+.ng-hide {
+    display: none !important;
+}
+
+/* Page */
+
+.page {
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
+    background-color: #f2eded;
+}
+
+.page.dark {
+    background-color: #2d454d;
+    color: #f2eded;
+}
+
+/* Forms */
+
+form {
+    padding: 0 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+}
+
+.helper-text {
+    font-size: 12px;
+    color: #999999;
+    margin-bottom: 2px;
+}
+
+.dark .helper-text {
+    color: #CFCFDB;
+}
+
+.form-group label {
+    flex-grow: 1;
+    font-size: 16px;
+}
+
+.form-group.divider {
+    border-bottom: 1px solid #d3d3d3;
+}
+
+/* Buttons */
+
+.button,
+.primary-button {
+    border-radius: 0;
+    border: none;
+    padding: 8px 8px;
+    text-transform: uppercase;
+    font-weight: 500;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    margin-left: 16px;
+    font-size: 14px;
+    min-width: 88px;
+    height: 36px;
+    font-family: "Roboto";
+}
+
+.dark .button,
+.dark .primary-button {
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.button:first-child, .primary-button:first-child,
+.no-margin {
+    margin-left: 0;
+}
+
+.button:disabled,
+.primary-button:disabled {
+    cursor: default;
+    box-shadow: none;
+}
+
+.button:enabled {
+    color: #ffffff;
+    background-color: #435D66;
+}
+
+.button:disabled {
+    color: rgba(255, 255, 255, 0.26);
+    background-color: rgba(67, 93, 102, 0.12);
+}
+
+.button:enabled:hover {
+    background-color: #62848d;
+}
+
+.primary-button:enabled {
+    color: #ffffff;
+    background-color: #c26059;
+}
+
+.primary-button:disabled {
+    color: rgba(255, 255, 255, 0.26);
+    background-color: rgba(194, 96, 89, 0.12);
+}
+
+.primary-button:enabled:hover {
+    background-color: #EA8982;
+}
+
+/* Input */
+
+input,
+select {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    flex-grow: 1;
+    padding: 8px 0 8px 0;
+    margin: 0 0 2px 0;
+    outline: none;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    flex-grow: 0;
+    color: #666;
+    display: inline-block;
+    font: normal normal normal 14px/1 'Material Design Iconic Font';
+    font-size: 26px;
+    speak: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    border-bottom: none;
     margin: 0;
 }
+
+input[type="checkbox"]:checked {
+    color: #e89f7f;
+}
+
+input[type="checkbox"]:before {
+    visibility: visible;
+    content: "\f2e2";
+}
+
+input[type="checkbox"]:checked:before {
+    content: "\f2e1";
+}
+
+.form-group input,
+.form-group select {
+    border-bottom: 1px solid #cccccc;
+}
+
+.form-group input[type="checkbox"] {
+    border-bottom: none;
+}
+
+.form-group input:last-child,
+.form-group select:last-child {
+    margin-bottom: 20px;
+}
+
+.form-group input[type="checkbox"]:last-child {
+    margin-bottom: 16px;
+}
+
+input.ng-dirty.ng-invalid.ng-touched,
+form.ng-submitted input.ng-invalid {
+    border-color: #ed766e;
+    border-width: 2px;
+    padding-bottom: 7px;
+}
+
+input.ng-dirty.ng-invalid.ng-touched + .helper-text,
+form.ng-submitted input.ng-invalid + .helper-text {
+    color: #ed766e;
+}
+
+.form-group input:focus {
+    border-color: #2d454d;
+    border-width: 2px;
+    padding-bottom: 7px;
+}
+
+.form-group input[type="checkbox"]:focus {
+    padding: 0;
+    outline: #2d454d auto 5px;
+}
+
+.dark .form-group input:focus {
+    border-color: #ede9c2;
+}
+
+.dark .form-group input {
+    color: #fff;
+    border-color: #8c8c9c;
+}
+
+::-webkit-input-placeholder {
+    color: #cccccc;
+}
+
+.dark ::-webkit-input-placeholder {
+    color: #8c8c9c;
+}
+
+/* Toolbar */
+
+.toolbar {
+    background-color: #2d454d;
+    color: #ede9c2;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.toolbar a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.toolbar a:first-child {
+    margin-right: 16px;
+}
+
+.toolbar .title {
+    flex-grow: 1;
+}
+
+/* Spinner */
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.spinner .fa {
+    width: 32px;
+    font-size: 32px;
+}
+
+/* List */
+
+.list {
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.list-item {
+    height: 72px;
+    background: #ffffff;
+    border-bottom: 1px solid #D3D3D3;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.list-title {
+    font-size: 16px;
+    padding-left: 8px;
+    color: #000000;
+}
+
+.list-caption {
+    color: #888888;
+    overflow: hidden;
+    padding-left: 8px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Registration */
+
+.registration-page {
+    padding: 1em;
+    text-align: center;
+}
+
+.registration-page h1 {
+    text-transform: uppercase;
+    font-size: 500%;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+    margin: 0;
+    color: #ede9c2;
+}
+
+.registration-page p {
+    font-size: 150%;
+    margin: 0;
+    font-style: italic;
+}
+
+.registration-page .or {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    text-transform: uppercase;
+    color: #ede9c2;
+}
+
+.registration-page .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ede9c2;
+    margin: 1em;
+}
+
+.registration-page .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+
+.registration-page section {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.registration-page .primary-button {
+    width: 80%;
+}
+
+.registration-page .primary-button:after {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-bottom-color: #c26059;
+    border-width: 10px;
+    margin-left: -10px;
+}
+
+.registration-page .primary-button:hover:after {
+    border-bottom-color: #EA8982;
+}
+
+.registration-page .primary-button:disabled:after {
+    border-bottom-color: rgba(194, 96, 89, 0.12);
+}
+
+/* Search */
+
+.search-form {
+    font-size: 16px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #D3D3D3;
+}
+
+.search-form input {
+    padding: 15px 8px;
+    margin: 0;
+}
+
+.search-form .fa {
+    color: #A6A6A6;
+}
+
+/* Contact */
 
 .contact-picture {
     background: #B3B3B3;
     min-width: 50px;
     width: 50px;
     height: 50px;
-    margin-left: 10px;
     color: #fff;
     font-size: 34px;
     text-align: center;
+    align-self: center;
     transition: background-color 0.5s;
     text-transform: uppercase;
 }
 
-.contact-list {
-    flex: 1;
-    background: #E0E0E0;
-    overflow-y: scroll;
+.contact-unread {
+    font-weight: 600;
 }
 
-.contact-item {
-    cursor: pointer;
-    height: 70px;
-    background: rgb(255, 255, 255);
-    border-top-style: solid;
-    border-top-color: #D3D3D3;
-    border-top-width: 1px;
-    flex-direction: row;
-    display: flex;
-    align-items: center;
+.contact-unread .contact-last-message {
+    color: #333;
+    font-weight: 400;
 }
 
-.contact-value {
-    font-size: 16px;
-    flex-grow: 1;
-    padding-left: 8px;
-}
-
-.add-contact-form {
-    flex-direction: row;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-}
-
-.add-contact-button {
-    cursor: pointer;
-    min-width: 40px;
-    background: #D06767;
-    color: #fff;
-    font-size: 30px;
-    text-align: center;
-}
-
-.context-input {
-    background: none;
-    color: #000;
-    font-size: 16px;
-    padding-left: 1em;
-    border: none;
-    outline: none;
-    flex: 1;
-    padding: 0.6em;
-}
-
-.conversation-window {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-}
+/* Conversation */
 
 .message-list {
-    flex: 1;
-    background: #E4E4E4;
+    flex-grow: 1;
     overflow-y: scroll;
-    padding: 0.1em;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 8px;
 }
 
 .send-message-form {
-    border-top-color: #B8B8B8;
-    border-top-style: solid;
-    border-top-width: 1px;
+    border-top: 1px solid #B8B8B8;
     flex-direction: row;
     display: flex;
     align-items: stretch;
     justify-content: center;
+    background-color: #ffffff;
+    flex-shrink: 0;
 }
 
 .send-message-button {
@@ -137,22 +460,11 @@ body {
     padding-left: 0.5em;
 }
 
-.send-message-input {
-    background: none;
-    color: #000;
-    font-size: 16px;
-    padding-left: 0.5em;
-    padding-top: 0.5em;
-    border: none;
-    padding-bottom: 0.5em;
-    outline: none;
-    flex: 1;
-}
-
 .message-item {
     display: flex;
     justify-content: flex-start;
     margin-top: 0.5em;
+    flex-shrink: 0;
 }
 
 .message-item-inner {
@@ -182,38 +494,6 @@ body {
     height: 30px;
 }
 
-.toolbar {
-    background: #242424;
-    display: flex;
-    align-items: stretch;
-}
-
-.toolbar-button {
-    cursor: pointer;
-    min-width: 36px;
-    max-width: 36px;
-    font-size: 24px;
-    text-align: center;
-    color: #ffffff;
-}
-
-.toolbar-text {
-    padding: 0.5em;
-    color: #fff;
-    font-size: 16px;
-    flex-grow: 1;
-    min-height: 37px;
-}
-
-.toolbar-options {
-    cursor: pointer;
-    min-width: 34px;
-    max-width: 34px;
-    font-size: 24px;
-    text-align: center;
-    color: #ffffff;
-}
-
 .message-info {
     color: #C0C0C0;
     margin-top: 0.2em;
@@ -224,239 +504,9 @@ body {
     font-size: 14px;
 }
 
-.default-query {
-    color: #ccc;
-}
+/* Flexbox utils */
 
-.contact-last-message {
-    color: #000000;
-    overflow: hidden;
-    height: 18px;
-    padding-left: 8px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-weight: 400;
-}
-
-
-.add-conversation-window {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+.row {
     display: flex;
-    flex-direction: column;
-    margin: 0;
-    background-color: #E4E4E4;
-}
-
-.add-contact-input {
-    background: #FFFFFF;
-    color: #000;
-    font-size: 16px;
-    padding-left: 1em;
-    border: none;
-    margin-top: 10px;
-    border-bottom-style: solid;
-    border-bottom-color: #C3C3C3;
-    border-bottom-width: 1px;
-    outline: none;
-    padding: 0.7em;
-}
-
-.contact-input-area {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-
-.contact-input-area .contact-picture {
-    margin-top: 40px;
-}
-
-.button-footer {
-    background-color: #242424;
-    display: flex;
-}
-
-.button-footer button {
-    background: none;
-    color: #fff;
-    border: none;
-    font-size: 14px;
-    padding: 0.5em;
-    flex-grow: 1;
-}
-
-.button-footer .divider {
-    width: 1px;
-    background-color: #fff;
-    margin: 6px 0;
-}
-
-.button-footer .fa {
-    font-size: 24px;
-}
-
-.input-error {
-    box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.5);
-}
-
-.option-item {
-    font-size: 16px;
-    padding: 0.5em;
-    border: 1px solid #e2e2e2;
-    margin: 0.5em;
-    /* flex: 1; */
-    display: flex;
-    justify-content: center;
-    color: #fff;
-    background-color: #861139;
-}
-
-.delete-option {
-    margin-left: 10px;
-}
-
-.app-option-item {
-    font-size: 16px;
-    /* padding: 0.5em; */
-    border: 1px solid #3C3C3C;
-    margin: 0.5em;
-    /* flex: 1; */
-    display: flex;
-    /*justify-content: center;*/
-}
-
-.option-label {
-    flex: 2;
-    padding: 0.5em; */;
-}
-
-.option-state {
-    flex: 2;
-    text-align: center;
-    background-color: #4DB3C0;
-    color: white;
-    padding: 0.5em; */;
-    height: 100%;
-}
-
-.option-icon {
-    text-align: center;
-    flex: 0.5;
-    padding: 0.5em; */;
-}
-
-.option-disabled {
-    background-color: #BD3463;
-    color: white;
-}
-
-.option-enabled {
-    background-color: #BD3463;
-}
-
-.contact-option-label {
-    font-size: 16px;
-    padding: 0.5em;
-    margin: 0.5em;
-    flex: 1;
-    text-align: right;
-}
-
-.contact-option-value {
-    font-size: 16px;
-    padding: 0.5em;
-    border-left-style: solid;
-    border-left-color: #BABABA;
-    border-left-width: 1px;
-    margin: 0.5em;
-    flex: 2;
-    justify-content: center;      
-    background-color: #FFFFFF;
-}
-
-.option-form-item {
-    display: flex;
-
-}
-
-.register-button {
-    font-size: 16px;
-    padding: 0.5em;
-    border: 1px solid #e2e2e2;
-    margin: 2em 1em 1em 1em;
-    cursor: pointer;
-    background-color: #1fa67a;
-    color: #fff;
-}
-
-.contact-unread {
-    font-weight: 600;
-}
-
-.contact-unread .contact-last-message {
-    color: #333;
-    font-weight: 400;
-}
-
-.register-label {
-    color: #000;
-    font-size: 19px;
-    font-weight: 500;
-    width: 80%;
-    margin-top: 10px;
-    text-align: center;
-}
-
-.register-submit-button {
-    font-size: 16px;
-    padding: 0.5em;
-    border: 1px solid #e2e2e2;
-    margin: 2em 1em 1em 1em;
-    justify-content: center;
-    background-color: #1FA67A;
-    cursor: pointer;
-    color:  white;
-}
-
-.registration-input-form {
-    background: #FFFFFF;
-    color: #000;
-    font-size: 16px;
-    border: none;
-    margin-top: 10px;
-    border-bottom-style: solid;
-    border-bottom-color: #C3C3C3;
-    border-bottom-width: 1px;
-    padding: 0.7em;
-}
-
-.button-icon {
-    padding-right: 0.5em;
-}
-
-.registration-error {
-    color: white;
-    padding: 10px;
-    background-color: #444;
-    text-align: center;
-}
-
-.registration-list {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.sent-code-success {
-    font-size: 16px;
-}
-
-.ng-hide {
-    display: none;
+    flex-direction: row;
 }

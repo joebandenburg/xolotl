@@ -4,25 +4,19 @@
 
     module.controller("AddConversationController",
         function($scope, $routeParams, $location, ColorGenerator, DataService) {
-
-            $scope.data = $routeParams.data;
-
             $scope.contact = {
                 name: "",
                 number: ""
             };
 
-            $scope.tryingToConfirm = false;
-            $scope.invalidInput = "";
-
             var isNumber = function(data) {
                 return !isNaN(parseFloat(data)) && isFinite(data);
             };
 
-            if (isNumber($scope.data)) {
-                $scope.contact.number = $scope.data;
+            if (isNumber($routeParams.data)) {
+                $scope.contact.number = $routeParams.data;
             } else {
-                $scope.contact.name = $scope.data;
+                $scope.contact.name = $routeParams.data;
             }
 
             $scope.openOptions = function() {
@@ -35,37 +29,8 @@
                 };
             };
 
-            $scope.cancel = function() {
-                $location.path("/contacts");
-            };
-
-            var isContactValid = function(contact) {
-                if (!contact.name) {
-                    $scope.invalidInput = contact.name;
-                    return false;
-                }
-                if (!contact.number) {
-                    $scope.invalidInput = contact.number;
-                    return false;
-                }
-                if (!isNumber(contact.number)) {
-                    $scope.invalidInput = contact.number;
-                    return false;
-                }
-                return true;
-            };
-
-            $scope.isValidInput = function(input) {
-                if (!$scope.tryingToConfirm) {
-                    return false;
-                } else {
-                    return $scope.invalidInput === input;
-                }
-            };
-
             $scope.confirm = function() {
-                $scope.tryingToConfirm = true;
-                if (isContactValid($scope.contact)) {
+                if ($scope.form.$valid) {
                     DataService.addContact({
                         name: $scope.contact.name,
                         number: $scope.contact.number,

@@ -34,13 +34,6 @@
             }, function(error) {
                 console.error(error);
             }).then(function() {
-                var element = document.getElementById("end-of-message-anchor");
-                if (element) {
-                    element.scrollIntoView({
-                        block: "end",
-                        behavior: "smooth"
-                    });
-                }
                 if ($scope.messages.length > 0) {
                     $scope.contact.mostRecentMessage = $scope.messages[$scope.messages.length - 1].sentTime;
                     $scope.contact.lastReadMessage = $scope.messages[$scope.messages.length - 1].sentTime;
@@ -80,6 +73,7 @@
 
         $scope.openOptions = function() {
             $location.path("/options/" + $routeParams.number);
+            return false;
         };
     });
 })();

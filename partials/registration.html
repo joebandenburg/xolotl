@@ -1,31 +1,16 @@
-<div class="conversation-window">
-    <div class="toolbar">
-        <div class="toolbar-text"></div>
+<h1>Xolotl</h1>
+<div class="container">
+    <section>
+        <p>Already installed a TextSecure app on your phone?</p>
+        <button class="primary-button no-margin" disabled>Pair with device</button>
+    </section>
+    <div class="or">
+        <div class="line"></div>
+        or
+        <div class="line"></div>
     </div>
-    <div class="options-window">
-        <form novalidate class="registration-list">
-            <input id="number-input" class="registration-input-form" placeholder="Enter your phone number" type="text" ng-model="userNumber">
-
-            <select class="add-contact-input" ng-options="countryCode.id as countryCode.label for countryCode in countryCodes" ng-model="countryCode" <option value ="">Pick your location</option>
-            </select>
-
-            <button class="register-button" ng-click="validateNumberAndSendCode()"><i class="fa fa-send button-icon"></i>Send me the secret code</button>
-
-            <div class="registration-error" ng-hide="currentError !== 'validation'">Failed to validate the phone number. Please confirm the number and country code are correct.</div>       
-
-            <div class="registration-error" ng-hide="currentError !== 'verification'">Failed to send the verification code to the device. Please confirm the number and country code is correct. The service might be currently down so you can also retry later.</div>
-
-            <div class="status-icon">
-                <i class="fa fa-spinner fa-pulse sent-code-success" ng-hide="status !== 'verification'"></i>
-                <div class="sent-code-success"ng-hide="status !== 'success'"><i class="fa fa-check button-icon"></i>Sent</div>
-            </div>
-
-            <input id="number-input" class="registration-input-form" placeholder="Secret code" type="text" ng-model="secretCode">
-
-            <button class="register-button" ng-click="verifyCodeAndRegister()"><i class="fa fa-rocket button-icon"></i>Register</button>
-            <div class="registration-error" ng-hide="currentError !== 'registration'">Failed to register. Confirm the code and retry.</div>
-            <div class="registration-error" ng-hide="currentError !== 'nocode'">Failed to register. No secret code entered.</div>
-            <div class="registration-error" ng-hide="currentError !== 'nonumber'">Failed to register. No number entered.</div>
-        </form>
-    </div>
+    <section>
+        <p>New to Xolotl?</p>
+        <a class="primary-button no-margin" href="#/registration/first">Register</a>
+    </section>
 </div>

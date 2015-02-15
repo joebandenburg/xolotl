@@ -6,18 +6,19 @@
         ColorGenerator, DataService) {
 
         $scope.contextInput = "";
-        var self = this;
 
         $scope.loadContacts = function() {
             DataService.getAllContactsByLatestMessage().then(function(contacts) {
                 var promises = contacts.map(function(contact) {
                     if (contact.mostRecentMessage !== 0) {
                         return DataService.getMessage(contact.number, contact.mostRecentMessage)
-                        .then(function(message) {
-                            $scope.$apply(function() {
-                                contact.lastMessage = message.body;
+                            .then(function(message) {
+                                if (message) {
+                                    $scope.$apply(function() {
+                                        contact.lastMessage = message.body;
+                                    });
+                                }
                             });
-                        });
                     }
                 });
                 $scope.$apply(function() {
@@ -29,13 +30,13 @@
             });
         };
 
-        $scope.$watch("contextInput", function(newValue, oldValue) {
+        $scope.$watch("contextInput", function() {
             if ($scope.contacts) {
                 $scope.filterContacts();
             }
         });
 
-        $scope.$on("contactsUpdated", function(messageEvent, args) {
+        $scope.$on("contactsUpdated", function() {
             $scope.loadContacts();
         });
 
@@ -61,10 +62,6 @@
             $location.path("/contact/" + contact.number);
         };
 
-        $scope.openOptions = function(contact) {
-            $location.path("/app-options");
-        };
-
         $scope.handleContext = function() {
             if ($scope.filteredContacts.length === 0) {
                 $scope.addContact();
@@ -72,5 +69,7 @@
                 $scope.openConversation($scope.filteredContacts[0]);
             }
         };
+
+        $scope.loadContacts();
     });
 })();

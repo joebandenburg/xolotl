@@ -1,30 +1,24 @@
-<div class="conversation-window">
-    <div class="toolbar">
-        <a class="toolbar-button" href="#/contacts"><i class="fa fa-angle-left"></i></a>
-        <div class="toolbar-text">{{contact.name || contact.number}}</div>
-        <div class="toolbar-options" ng-click="openOptions()">
-            <i class="fa fa-cog" ></i>            
-        </div>
-    </div>
-    <div class="message-list">
-        <div class="message-item" ng-repeat="message in messages" ng-class="{'self-message': message.isSelf}">
-            <div class="message-identity" ng-style="{{contactStyle(contact.number)}}" ng-hide="message.isSelf" >{{contact.name.charAt(0)}}</div>
-            <div class="message-item-inner" ng-style="{{messageStyle(contact.number, message.self)}}">
-                <div class="message-body">
-                    {{message.body}}
-                </div>
-                <div class="message-info">
-                    {{message.sentTime | date:"short"}}
-                </div>
-                <div class="message-info">
-                    {{message.status}}
-                </div>
+<div class="toolbar">
+    <a href="#/contacts" class="md md-arrow-back"></a>
+    <div class="title">{{contact.name || contact.number}}</div>
+    <a ng-click="openOptions()" class="fa fa-cog"></a>
+</div>
+<div class="message-list">
+    <div class="message-item" ng-repeat="message in messages" ng-class="{'self-message': message.isSelf}">
+        <div class="message-identity" ng-style="{{contactStyle(contact.number)}}" ng-hide="message.isSelf" >{{contact.name.charAt(0)}}</div>
+        <div class="message-item-inner" ng-style="{{messageStyle(contact.number, message.self)}}">
+            <div class="message-body">
+                {{message.body}}
+            </div>
+            <div class="message-info">
+                {{message.sentTime | date:"short"}}
+            </div>
+            <div class="message-info">
+                {{message.status}}
             </div>
         </div>
-        <div id="end-of-message-anchor"></div>
-    </div>
-    <div class="send-message-form">
-        <!-- <div class="send-message-button" ng-click="sendMessage()"><i class="fa fa-comment"></i> : </div> -->
-        <input class="send-message-input" type="text" ng-enter="sendMessage()" ng-model="message">
     </div>
 </div>
+<form class="send-message-form" ng-submit="sendMessage()">
+    <input type="text" ng-model="message">
+</form>

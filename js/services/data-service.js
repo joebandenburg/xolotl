@@ -39,7 +39,7 @@
             return DatabaseService.inTransaction(["messageStore"], function(messageStore) {
                 var index = messageStore.index("number");
                 var singleKeyRange = IDBKeyRange.only(number);
-                return DatabaseService.getDataObjects(index, singleKeyRange);
+                return DatabaseService.getDataObjects(index, singleKeyRange, "prev");
             });
         };
 

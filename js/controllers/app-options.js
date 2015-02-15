@@ -24,10 +24,6 @@
                 });
             });
         };
-
-        $scope.back = function() {
-            $location.path("/contacts");
-        };
     });
 
 })();

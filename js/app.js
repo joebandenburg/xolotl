@@ -1,9 +1,9 @@
 (function() {
     "use strict";
     var app = angular.module("XolotlApp",
-        ["ngRoute", "XolotlContacts", "XolotlConversation", "XolotlOption",
+        ["ngRoute", "ngAnimate", "XolotlContacts", "XolotlConversation", "XolotlOption",
         "XolotlAddConversation", "XolotlEnter", "XolotlNotificationService",
-        "XolotlAppOption", "XolotlRegistration", "XolotlDataService"]);
+        "XolotlAppOption", "XolotlRegistration", "XolotlDataService", "XolotlRegistrationFirstDevice"]);
 
     app.config(function($routeProvider) {
         $routeProvider.when("/contacts", {
@@ -29,6 +29,10 @@
         $routeProvider.when("/registration", {
             templateUrl: "partials/registration.html",
             controller: "RegistrationController"
+        });
+        $routeProvider.when("/registration/first", {
+            templateUrl: "partials/registration-first-device.html",
+            controller: "RegistrationFirstDeviceController"
         });
         $routeProvider.otherwise({
             redirectTo: "/contacts"

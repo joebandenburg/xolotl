@@ -1,27 +1,12 @@
-<div class="conversation-window">
-    <div class="toolbar">
-        <div class="toolbar-button" ng-click="openConversation()"><i class="fa fa-angle-left"></i></div>
-        <div class="toolbar-text">Options</div>
-    </div>
-    <div class="options-window">
-        <div class="option-form-item">
-            <div class="contact-option-label">
-                Name
-            </div>
-            <div class="contact-option-value">
-                {{contact.name}}
-            </div>       
-        </div>
-        <div class="option-form-item">
-            <div class="contact-option-label">
-                Number
-            </div>
-            <div class="contact-option-value">
-                {{contact.number}}
-            </div>
-        </div>
-        <div class="option-item" ng-click="deleteConversation()">
-            <i class="fa fa-bomb"></i><div class="delete-option">Delete conversation</div>
-        </div>
-    </div>
+<div class="toolbar">
+    <a ng-click="openConversation()" class="md md-arrow-back"></a>
+    <div class="title">{{contact.name || contact.number}}</div>
 </div>
+<form class="options-window" ng-submit="openConversation()">
+    <div class="form-group">
+        <input type="text" placeholder="Name" ng-model="contact.name" />
+    </div>
+    <div class="form-group">
+        <button ng-click="deleteConversation()" class="primary-button">Delete conversation</button>
+    </div>
+</form>

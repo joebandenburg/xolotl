@@ -1,0 +1,38 @@
+<div class="toolbar">
+    <a href="#/registration" class="md md-arrow-back"></a>
+    <div class="title">Registration</div>
+</div>
+<form name="step1" novalidate>
+    <div class="form-group">
+        <input ng-model="phoneNumber" placeholder="Phone number" required phone-number/>
+        <!-- TODO: Should support local as well -->
+        <div class="helper-text">International number.</div>
+    </div>
+    <div class="form-group row">
+        <button ng-click="sendVerificationCodeCall()" class="button">Call</button>
+        <button ng-click="sendVerificationCodeSMS()" class="button">Send SMS</button>
+    </div>
+</form>
+<form name="step2" novalidate ng-show="verificationCodeSent">
+    <div class="form-group">
+        <div class="helper-text">
+            The code should arrive in a few moments.
+            <a href="#">What if the code hasn't arrived?</a>
+        </div>
+    </div>
+    <div class="form-group">
+        <input ng-model="verificationCode" placeholder="Verification code" required verification-code/>
+        <div class="helper-text">###-###</div>
+    </div>
+    <div class="form-group">
+        <button ng-click="register()" class="primary-button" ng-disabled="loading">
+            <i class="fa fa-rocket"></i>
+            Register
+        </button>
+    </div>
+</form>
+<div class="form-group">
+    <div class="spinner" ng-show="loading">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+    </div>
+</div>
