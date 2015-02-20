@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/joebandenburg/xolotl.svg?branch=master)](https://travis-ci.org/joebandenburg/xolotl)
 
-# xolotl
-don't worry about that
+# Xolotl
+
+An early prototype of a TextSecure client in the form of a Google Chrome app.
