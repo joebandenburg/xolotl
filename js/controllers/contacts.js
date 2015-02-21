@@ -9,16 +9,15 @@
 
         $scope.loadContacts = function() {
             DataService.getAllContactsByLatestMessage().then(function(contacts) {
-                var promises = contacts.map(function(contact) {
+                contacts.forEach(function(contact) {
                     if (contact.mostRecentMessage !== 0) {
-                        return DataService.getMessage(contact.number, contact.mostRecentMessage)
-                            .then(function(message) {
-                                if (message) {
-                                    $scope.$apply(function() {
-                                        contact.lastMessage = message.body;
-                                    });
-                                }
-                            });
+                        DataService.getMessage(contact.number, contact.mostRecentMessage).then(function(message) {
+                            if (message) {
+                                $scope.$apply(function() {
+                                    contact.lastMessage = message.body;
+                                });
+                            }
+                        });
                     }
                 });
                 $scope.$apply(function() {
@@ -43,7 +42,7 @@
         $scope.filterContacts = function() {
             var matchingText = $scope.contextInput;
             $scope.filteredContacts = _.filter($scope.contacts, function(contact) {
-                return matchingText === "" || _.indexOf(contact.name, matchingText) === 0;
+                return matchingText === "" || contact.name.indexOf(matchingText) > -1;
             });
         };
 
