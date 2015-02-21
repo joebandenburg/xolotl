@@ -5,15 +5,13 @@
     "quotmark": "double",
     "undef": true,
     "typed": true,
-    "node": true,
-    "esnext": true,
     "strict": true,
+    "browser": true,
     "globals": {
         "angular": true,
         "chrome": true,
-        "window": true,
         "IDBKeyRange": true,
-        "document" : true,
-        "_": true
+        "_": true,
+        "console": true
     }
 }

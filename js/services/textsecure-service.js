@@ -15,8 +15,8 @@
                 };
                 webSocket.onmessage = function(event) {
                     var reader = new FileReader();
-                    reader.onload = function(data) {
-                        wrappedWebSocket.onmessage(data);
+                    reader.onload = function() {
+                        wrappedWebSocket.onmessage(reader.result);
                     };
                     reader.readAsArrayBuffer(event.data);
                 };
