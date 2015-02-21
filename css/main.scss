@@ -242,7 +242,7 @@ form.ng-submitted input.ng-invalid {
 /* Toolbar */
 
 .toolbar {
-    @include title($secondary-highlight-color, $secondary-bg-color);
+    @include title($secondary-text-color, $secondary-bg-color);
     background-color: $secondary-bg-color;
     height: 56px;
     display: flex;

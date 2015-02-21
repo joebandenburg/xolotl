@@ -6,7 +6,7 @@
     text-align: center;
 
     h1 {
-        @include display3($secondary-highlight-color, $secondary-bg-color);
+        @include display3($secondary-highlight-color, $secondary-highlight-color);
         text-transform: uppercase;
         text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
         margin: 0;
