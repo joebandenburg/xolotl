@@ -35,8 +35,8 @@
                 console.error(error);
             }).then(function() {
                 if ($scope.messages.length > 0) {
-                    $scope.contact.mostRecentMessage = $scope.messages[$scope.messages.length - 1].sentTime;
-                    $scope.contact.lastReadMessage = $scope.messages[$scope.messages.length - 1].sentTime;
+                    $scope.contact.mostRecentMessage = $scope.messages[0].sentTime;
+                    $scope.contact.lastReadMessage = $scope.messages[0].sentTime;
                 }
                 DataService.updateContact($scope.contact);
             });
