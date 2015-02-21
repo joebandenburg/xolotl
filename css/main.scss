@@ -23,6 +23,26 @@ a {
     }
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track:hover {
+    background-color: adjust_color($primary-bg-color, $lightness: -5%, $saturation: -10%);
+    border-left: 1px solid adjust_color($primary-bg-color, $lightness: -15%, $saturation: -10%);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: adjust_color($primary-bg-color, $lightness: -30%, $saturation: -15%);
+    border: 1px solid transparent;
+    border-left-width: 2px;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: adjust_color($primary-bg-color, $lightness: -40%, $saturation: -20%);
+}
+
 .ng-hide:not(.hide) {
     display: none !important;
 }
@@ -285,7 +305,7 @@ form.ng-submitted input.ng-invalid {
 
 .list {
     flex-grow: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .list-item {
