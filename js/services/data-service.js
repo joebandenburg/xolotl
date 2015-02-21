@@ -23,7 +23,13 @@
                     return self.updateContact(contact);
                 });
             });
+        });
 
+        $rootScope.$on("deliveryReceiptReceived", function(event, data) {
+            self.getMessage(data.number, data.sentTime).then(function(message) {
+                message.status = MessageStatus.RECEIVED;
+                self.updateMessage(message);
+            });
         });
 
         /*
@@ -53,7 +59,7 @@
         this.addMessage = function(message) {
             return DatabaseService.addEntity("messageStore", message).then(function() {
                 $rootScope.$broadcast("messagesUpdated", {number: message.number});
-                return TextSecureService.sendMessage(message.number, message.body);
+                return TextSecureService.sendMessage(message.number, message.body, message.sentTime);
             }).then(function() {
                 message.status = MessageStatus.SENT;
                 return self.updateMessage(message);

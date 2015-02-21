@@ -35,11 +35,14 @@
         };
 
         textSecure.onreceipt = function(fromNumber, timestamp) {
-            console.log("Receipt yey!");
+            $rootScope.$broadcast("deliveryReceiptReceived", {
+                number: fromNumber,
+                sentTime: timestamp
+            });
         };
 
-        this.sendMessage = function(number, message) {
-            return textSecure.sendMessage(number, message);
+        this.sendMessage = function(number, message, timestamp) {
+            return textSecure.sendMessage(number, message, timestamp);
         };
 
         this.requestVerificationCode = textSecure.requestVerificationCode;
