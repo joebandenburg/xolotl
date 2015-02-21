@@ -13,24 +13,24 @@
     }
 
     p {
-        @include headline($secondary-text-color, $secondary-bg-color);
+        @include title($secondary-text-color, $secondary-bg-color);
         margin: 0;
         font-style: italic;
     }
 
     .or {
+        @include body2($secondary-highlight-color, $secondary-bg-color);
         display: flex;
         justify-content: center;
         align-items: center;
         flex-grow: 1;
         text-transform: uppercase;
-        color: $secondary-highlight-color;
     }
 
     .line {
         flex-grow: 1;
         height: 1px;
-        background-color: $secondary-highlight-color;
+        background-color: mix($secondary-highlight-color, $secondary-bg-color, 87%);
         margin: 1em;
     }
 
@@ -51,25 +51,25 @@
 
     .primary-button {
         width: 80%;
-    }
 
-    .primary-button:after {
-        bottom: 100%;
-        left: 50%;
-        border: 10px solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        border-bottom-color: $primary-highlight-color;
-        margin-left: -10px;
-    }
+        &:after {
+            bottom: 100%;
+            left: 50%;
+            border: 10px solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            border-bottom-color: $primary-highlight-color;
+            margin-left: -10px;
+        }
 
-    .primary-button:hover:after {
-        border-bottom-color: #EA8982;
-    }
+        &:hover:after {
+            border-bottom-color: adjust_color($primary-highlight-color, $lightness: +15%);
+        }
 
-    .primary-button:disabled:after {
-        border-bottom-color: rgba(194, 96, 89, 0.12);
+        &:disabled:after {
+            border-bottom-color: adjust_color($primary-highlight-color, $alpha: -0.70);
+        }
     }
 }
