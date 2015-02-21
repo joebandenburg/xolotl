@@ -75,5 +75,12 @@
             $location.path("/options/" + $routeParams.number);
             return false;
         };
+
+        $scope.focus = function() {
+            var el = document.getElementById("send-message");
+            el.focus();
+        };
+
+        $scope.focus();
     });
 })();

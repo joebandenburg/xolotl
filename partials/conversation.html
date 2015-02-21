@@ -3,7 +3,7 @@
     <div class="title">{{contact.name || contact.number}}</div>
     <a ng-click="openOptions()" class="fa fa-cog"></a>
 </div>
-<div class="message-list">
+<div class="message-list" ng-click="focus()">
     <div class="message-item" ng-repeat="message in messages" ng-class="{'self-message': message.isSelf}">
         <div class="message-identity" ng-style="{{contactStyle(contact.number)}}" ng-hide="message.isSelf" >{{contact.name.charAt(0)}}</div>
         <div class="message-item-inner" ng-style="{{messageStyle(contact.number, message.self)}}">
@@ -20,5 +20,5 @@
     </div>
 </div>
 <form class="send-message-form" ng-submit="sendMessage()">
-    <input type="text" ng-model="message">
+    <input id="send-message" type="text" ng-model="message" />
 </form>
