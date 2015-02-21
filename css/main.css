@@ -302,6 +302,7 @@ form.ng-submitted input.ng-invalid + .helper-text {
 .list-title {
     font-size: 16px;
     padding-left: 8px;
+    font-weight: 400;
     color: #000000;
 }
 
@@ -423,13 +424,9 @@ form.ng-submitted input.ng-invalid + .helper-text {
     text-transform: uppercase;
 }
 
-.contact-unread {
+.contact-unread .list-title,
+.contact-unread .list-caption {
     font-weight: 600;
-}
-
-.contact-unread .contact-last-message {
-    color: #333;
-    font-weight: 400;
 }
 
 /* Conversation */
