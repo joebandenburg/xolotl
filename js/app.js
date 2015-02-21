@@ -2,7 +2,7 @@
     "use strict";
     var app = angular.module("XolotlApp",
         ["ngRoute", "ngAnimate", "XolotlContacts", "XolotlConversation", "XolotlOption",
-        "XolotlAddConversation", "XolotlEnter", "XolotlNotificationService",
+        "XolotlAddConversation", "XolotlNotificationService",
         "XolotlAppOption", "XolotlRegistration", "XolotlDataService", "XolotlRegistrationFirstDevice"]);
 
     app.config(function($routeProvider) {
