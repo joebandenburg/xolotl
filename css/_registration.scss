@@ -1,0 +1,75 @@
+@import "color";
+@import "typography";
+
+.registration-page {
+    padding: 1em;
+    text-align: center;
+
+    h1 {
+        @include display3($secondary-highlight-color, $secondary-bg-color);
+        text-transform: uppercase;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+        margin: 0;
+    }
+
+    p {
+        @include headline($secondary-text-color, $secondary-bg-color);
+        margin: 0;
+        font-style: italic;
+    }
+
+    .or {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        text-transform: uppercase;
+        color: $secondary-highlight-color;
+    }
+
+    .line {
+        flex-grow: 1;
+        height: 1px;
+        background-color: $secondary-highlight-color;
+        margin: 1em;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        flex-grow: 1;
+    }
+
+    section {
+        flex-grow: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .primary-button {
+        width: 80%;
+    }
+
+    .primary-button:after {
+        bottom: 100%;
+        left: 50%;
+        border: 10px solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        border-bottom-color: $primary-highlight-color;
+        margin-left: -10px;
+    }
+
+    .primary-button:hover:after {
+        border-bottom-color: #EA8982;
+    }
+
+    .primary-button:disabled:after {
+        border-bottom-color: rgba(194, 96, 89, 0.12);
+    }
+}

@@ -1,0 +1,101 @@
+@import "color";
+
+$font: "Roboto", sans-serif;
+
+@mixin roboto {
+    font-family: $font;
+}
+
+@mixin light {
+    @include roboto;
+    font-weight: 300;
+}
+
+@mixin regular {
+    @include roboto;
+    font-weight: 400;
+}
+
+@mixin medium {
+    @include roboto;
+    font-weight: 500;
+}
+
+@mixin display4($text, $background) {
+    font-size: 112px;
+    @include light;
+    color: mix($text, $background, 54%);
+}
+
+@mixin display3($text, $background) {
+    font-size: 56px;
+    @include regular;
+    color: mix($text, $background, 54%);
+    line-height: 60px;
+}
+
+@mixin display2($text, $background) {
+    font-size: 45px;
+    @include regular;
+    color: mix($text, $background, 54%);
+    line-height: 48px;
+}
+
+@mixin display1($text, $background) {
+    font-size: 34px;
+    @include regular;
+    color: mix($text, $background, 54%);
+    line-height: 40px;
+}
+
+@mixin headline($text, $background) {
+    font-size: 24px;
+    @include regular;
+    color: mix($text, $background, 87%);
+    line-height: 32px;
+}
+
+@mixin title($text, $background) {
+    font-size: 20px;
+    @include medium;
+    color: mix($text, $background, 87%);
+}
+
+@mixin subhead($text, $background) {
+    font-size: 15px;
+    @include regular;
+    color: mix($text, $background, 87%);
+    line-height: 24px;
+}
+
+@mixin body2($text, $background) {
+    font-size: 13px;
+    @include medium;
+    color: mix($text, $background, 87%);
+    line-height: 24px;
+}
+
+@mixin body1($text, $background) {
+    font-size: 13px;
+    @include regular;
+    color: mix($text, $background, 87%);
+    line-height: 20px;
+}
+
+@mixin caption($text, $background) {
+    font-size: 12px;
+    @include regular;
+    color: mix($text, $background, 54%);
+    line-height: 15px;
+}
+
+@mixin button($text, $background) {
+    font-size: 14px;
+    text-transform: uppercase;
+    @include medium;
+    color: mix($text, $background, 87%);
+}
+
+body {
+    @include body1($primary-text-color, $primary-bg-color);
+}

@@ -1,0 +1,416 @@
+@import "typography";
+@import "metrics";
+@import "color";
+@import "registration";
+
+/* Global */
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: $secondary-highlight-color;
+    cursor: pointer;
+}
+
+:focus {
+    outline-color: $secondary-bg-color;
+
+    .dark &,
+    .toolbar & {
+        outline-color: $secondary-highlight-color;
+    }
+}
+
+.ng-hide:not(.hide) {
+    display: none !important;
+}
+
+.ng-hide.hide {
+    visibility: hidden;
+}
+
+/* Page */
+
+.page {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: $primary-bg-color;
+
+    &.dark {
+        background-color: $secondary-bg-color;
+        color: $primary-bg-color;
+    }
+}
+
+/* Forms */
+
+form {
+    padding: 0 $double-unit;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: $double-unit;
+
+    label {
+        @include subhead($primary-text-color, $primary-bg-color);
+        flex-grow: 1;
+    }
+
+    &.divider {
+        border-bottom: 1px solid $border-color;
+    }
+}
+
+.helper-text {
+    @include caption($primary-text-color, $primary-bg-color);
+    color: #999999;
+    margin-bottom: 2px;
+
+    .dark & {
+        @include caption($secondary-text-color, $secondary-bg-color);
+    }
+}
+
+/* Buttons */
+
+.button,
+.primary-button {
+    border-radius: 0;
+    border: none;
+    padding: 8px 8px;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    margin-left: 16px;
+    min-width: 88px;
+    height: 36px;
+
+    .dark & {
+        box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    &:disabled {
+        cursor: default;
+        box-shadow: none;
+    }
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+.no-margin {
+    margin-left: 0;
+}
+
+@mixin button-states($text-color, $bg-color) {
+    &:enabled {
+        @include button($text-color, $bg-color);
+        background-color: $bg-color;
+    }
+
+    &:disabled {
+        @include button(adjust_color($text-color, $alpha: -0.70), $bg-color);
+        background-color: adjust_color($bg-color, $alpha: -0.70);
+    }
+
+    &:enabled:hover {
+        background-color: adjust_color($bg-color, $lightness: +15%);
+    }
+}
+
+.button {
+    @include button-states($secondary-text-color, $tertiary-bg-color);
+}
+
+.primary-button {
+    @include button-states($secondary-text-color, $primary-highlight-color);
+}
+
+/* Input */
+
+input,
+select {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    flex-grow: 1;
+    padding: 8px 0 8px 0;
+    margin: 0 0 2px 0;
+    outline: none;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    flex-grow: 0;
+    color: #666;
+    display: inline-block;
+    font: normal normal normal 14px/1 'Material Design Iconic Font';
+    font-size: 26px;
+    speak: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    border-bottom: none;
+    margin: 0;
+
+    &:checked {
+        color: $primary-highlight-color;
+
+        &:before {
+            content: "\f2e1";
+        }
+    }
+
+    &:before {
+        content: "\f2e2";
+    }
+}
+
+.form-group {
+    input, select {
+        border-bottom: 1px solid #cccccc;
+
+        &:last-child {
+            margin-bottom: 20px;
+        }
+
+        &:focus {
+            border-color: $secondary-bg-color;
+            border-width: 2px;
+            padding-bottom: 7px;
+        }
+    }
+
+    input[type="checkbox"] {
+        border-bottom: none;
+
+        &:last-child {
+            margin-bottom: 16px;
+        }
+
+        &:focus {
+            padding: 0;
+            outline: $secondary-bg-color auto 5px;
+        }
+    }
+
+    .dark & {
+        input {
+            color: #fff;
+            border-color: $tertiary-bg-color;
+
+            &:focus {
+                border-color: $secondary-highlight-color;
+            }
+        }
+    }
+}
+
+
+input.ng-dirty.ng-invalid.ng-touched,
+form.ng-submitted input.ng-invalid {
+    border-color: $error-color;
+    border-width: 2px;
+    padding-bottom: 7px;
+
+    & + .helper-text {
+        color: $error-color;
+    }
+}
+
+::-webkit-input-placeholder {
+    color: #cccccc;
+}
+
+.dark ::-webkit-input-placeholder {
+    color: $tertiary-bg-color;
+}
+
+/* Toolbar */
+
+.toolbar {
+    @include title($secondary-highlight-color, $secondary-bg-color);
+    background-color: $secondary-bg-color;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: $double-unit;
+    flex-shrink: 0;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        &:first-child {
+            margin-right: $double-unit;
+        }
+    }
+
+    .title {
+        flex-grow: 1;
+    }
+}
+
+/* Spinner */
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+
+    .fa {
+        width: 32px;
+        font-size: 32px;
+    }
+}
+
+@mixin paper-shadow {
+    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* List */
+
+.list {
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.list-item {
+    height: 72px;
+    background: $white-bg-color;
+    border-bottom: 1px solid $border-color;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    @include paper-shadow;
+}
+
+.list-title {
+    @include subhead($primary-text-color, $white-bg-color);
+    padding-left: 8px;
+}
+
+.list-caption {
+    @include caption($primary-text-color, $white-bg-color);
+    overflow: hidden;
+    padding-left: 8px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Search */
+
+.search-form {
+    @include subhead($primary-text-color, $white-bg-color);
+    background-color: #ffffff;
+    border-bottom: 1px solid $border-color;
+
+    input {
+        padding: 15px 8px;
+        margin: 0;
+    }
+
+    .fa {
+        color: #cccccc;
+    }
+}
+
+/* Contact */
+
+.contact-picture {
+    background: #B3B3B3;
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    font-size: 34px;
+    text-align: center;
+    align-self: center;
+    transition: background-color 0.5s;
+    text-transform: uppercase;
+    line-height: normal;
+}
+
+.contact-unread .list-title,
+.contact-unread .list-caption {
+    font-weight: 700;
+}
+
+/* Conversation */
+
+.message-list {
+    flex-grow: 1;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 8px;
+}
+
+.send-message-form {
+    border-top: 1px solid #B8B8B8;
+    flex-direction: row;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    background-color: #ffffff;
+    flex-shrink: 0;
+}
+
+.message-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0.5em;
+    flex-shrink: 0;
+}
+
+.message-item-inner {
+    background: #fff;
+    padding: 0.5em;
+    max-width: 80%;
+    word-wrap: break-word;
+    border-top: 1px solid transparent;
+    @include paper-shadow;
+}
+
+.message-item.self-message {
+    justify-content: flex-end;
+}
+
+.message-identity {
+    background: rgb(95, 95, 95);
+    font-size: 20px;
+    min-width: 30px;
+    text-align: center;
+    color: #fff;
+    height: 30px;
+}
+
+.message-info {
+    @include caption(#888888, $white-bg-color);
+    margin-top: 0.2em;
+}
+
+.message-body {
+    @include body1($primary-text-color, $white-bg-color);
+}
+
+/* Flexbox utils */
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
