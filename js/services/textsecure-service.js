@@ -7,7 +7,22 @@
     ]);
 
     module.service("TextSecureService", function($rootScope, MessageStatus, TextSecureStorageService) {
-        var textSecure = window.textsecure(TextSecureStorageService, "textsecure-service-staging.whispersystems.org");
+        var textSecure = window.textsecure(TextSecureStorageService, "textsecure-service-staging.whispersystems.org", {
+            connect: function(url) {
+                var webSocket = new WebSocket(url);
+                var wrappedWebSocket = {
+                    send: webSocket.send.bind(webSocket)
+                };
+                webSocket.onmessage = function(event) {
+                    var reader = new FileReader();
+                    reader.onload = function(data) {
+                        wrappedWebSocket.onmessage(data);
+                    };
+                    reader.readAsArrayBuffer(event.data);
+                };
+                return wrappedWebSocket;
+            }
+        });
 
         textSecure.onmessage = function(fromNumber, withMessage, timestamp) {
             $rootScope.$broadcast("newMessageReceived", {
