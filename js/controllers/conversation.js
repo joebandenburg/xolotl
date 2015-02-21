@@ -59,6 +59,28 @@
             }
         };
 
+        $scope.showStatus = function(message) {
+            return message.isSelf &&
+                (message.status !== MessageStatus.SENT || message.status !== MessageStatus.RECEIVED);
+        };
+
+        $scope.showTimestamp = function(message) {
+            return message.status === MessageStatus.SENT || message.status === MessageStatus.RECEIVED;
+        };
+
+        $scope.showReceipt = function(message) {
+            return message.isSelf && message.status === MessageStatus.RECEIVED;
+        };
+
+        $scope.status = function(message) {
+            switch (message.status) {
+                case MessageStatus.SAVED:
+                    return "Sending...";
+                case MessageStatus.FAILED:
+                    return "Failed";
+            }
+        };
+
         $scope.sendMessage = function() {
             var message = {
                 number: $scope.number,

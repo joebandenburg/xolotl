@@ -10,11 +10,12 @@
             <div class="message-body">
                 {{message.body}}
             </div>
-            <div class="message-info">
+            <div class="message-info" ng-hide="!showTimestamp(message)">
                 {{message.sentTime | date:"short"}}
+                <i ng-hide="!showReceipt(message)" class="fa fa-check hide"></i>
             </div>
-            <div class="message-info">
-                {{message.status}}
+            <div class="message-info" ng-hide="!showStatus(message)">
+                {{status(message)}}
             </div>
         </div>
     </div>

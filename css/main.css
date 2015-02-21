@@ -24,8 +24,12 @@ a {
     outline-color: #2d454d;
 }
 
-.ng-hide {
+.ng-hide:not(.hide) {
     display: none !important;
+}
+
+.ng-hide.hide {
+    visibility: hidden;
 }
 
 /* Page */
