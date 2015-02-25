@@ -20,6 +20,21 @@
                     };
                     reader.readAsArrayBuffer(event.data);
                 };
+                webSocket.onopen = function() {
+                    if (wrappedWebSocket.onopen) {
+                        wrappedWebSocket.onopen.apply(this, arguments);
+                    }
+                };
+                webSocket.onclose = function() {
+                    if (wrappedWebSocket.onclose) {
+                        wrappedWebSocket.onclose.apply(this, arguments);
+                    }
+                };
+                webSocket.onerror = function() {
+                    if (wrappedWebSocket.onerror) {
+                        wrappedWebSocket.onerror.apply(this, arguments);
+                    }
+                };
                 return wrappedWebSocket;
             }
         });
